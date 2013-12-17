@@ -1,0 +1,385 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    /*font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    /*background-color: #4D5C52;*/
+}
+
+ ::-webkit-scrollbar {
+      width: 8px;
+} 
+
+::-webkit-scrollbar-track {
+      background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+      background-color: white;
+
+}
+
+::-webkit-scrollbar-corner {
+      background-color: black;
+}
+
+.title-buttons .fa {
+    float: right;
+    padding: 5px;
+    color: white;
+    font-size: 1.2em; 
+}
+
+.title-buttons .fa:hover {
+    color: black;
+}
+
+.selectable-box .fa-folder-open {
+    /*color: rgb(183, 223, 132);*/
+    color: white;
+    font-size: 46px;
+}
+
+.selectable-box .fa-folder-open:hover {
+    color: #E3FF17;
+}
+
+.toolbox .fa-arrow-circle-left {
+    padding: 4px;
+    color: white;
+    font-size: 1.3em;
+}
+
+.viewport {
+    position: relative;
+    /*border: 1px solid black;*/
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    /*background-color: white;*/
+}
+
+.selectable {
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.holder {
+    border:1px solid white;
+    width: 300px;
+    height: 270px;
+    background: rgb(125,126,125); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+}
+
+.selectable .content {
+    overflow-y: scroll;
+    color:white;
+    padding:10px;
+    font-family: "Gudea", sans-serif;
+}
+
+.folder-icon {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-image: url("../img/folder-icon.png")
+}
+
+.back-icon {
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-image: url("img/back-icon.png")
+}
+
+.folder-icon:hover {
+    border: 1px solid white;
+}
+
+.selectable {
+    float: right;
+}
+
+.border-active {
+    border: 2px dashed white
+}
+
+.selectable h5 {
+    font-family: "Gudea", sans-serif;
+    background:transparent;
+    color:white;
+    margin: 0px auto;
+    padding: 5px;
+    position: absolute;
+    z-index: 2;
+}
+
+.selectable .title-container {
+    background-color: rgb(125,126,125);
+    width: inherit;
+    height: 30px;
+/*    border-bottom: 1px;
+    border-bottom-color: white;
+    border-bottom-style: solid;*/
+    border: 1px solid white;
+    -moz-border-radius-topright:5px;
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-right-radius:5px;
+    -webkit-border-top-left-radius:5px;
+}
+
+.title-container .title-buttons {
+    float: right;
+    width: inherit;
+    height: 30px;
+    font-family: "Gudea", sans-serif;
+    background: transparent;
+    color:white;
+    margin: 0px auto;
+    position: absolute;
+    z-index: 1;
+}
+
+.selectable .toolbox {
+    float: left;
+    height: 25px;
+    width: calc(100% - 5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-x: auto;
+    padding-left: 5px;
+}
+
+.selectable-box { 
+    text-decoration: none; 
+    position: relative;
+    margin: 3px; 
+    list-style: none;
+    float: left;
+    width: 50px;
+    height: 60px;
+    font-size: 0.7em; 
+}
+
+.selectable-box .selectable-title {
+    font-family: "Gudea", sans-serif;
+    position: absolute;
+    width: inherit;
+    height: 25%;
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    overflow: hidden
+}
+
+.selectable-box > img:hover {
+    border: 1px solid;
+}
+
+.content {
+    height: 210px;
+}
+
+.selectable-box > img { 
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 75%;
+}
+
+.hud {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    z-index: 250000;
+    background: transparent;
+}
+
+.renderspace {
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+}
+
+canvas {
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    position: absolute;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.keyval {
+    
+}
+
+.keyval > div {
+     height: 20px;
+     clear: both;
+}
+
+.keyval label {
+    float: left;
+    text-align: right;
+    font-size: 0.8em;
+    font-family: "Gudea", sans-serif;
+}
+
+.keyval input {
+    width: 65%;
+    float: right;
+    border: 1px solid white;
+    color: white;
+    background-color: gray;
+}
+
+.keyval select {
+    width: 65%;
+    float: right;
+    color: white;
+    background-color: gray;
+}
+
+.tileform-button {
+    bottom: 0px;
+    background: #1B1B20;
+    color: #FFF;
+    left: 50%;
+    margin-left: -35px;
+    font-weight: bold;
+    border: 1px solid #FFF;
+    padding: 0px;
+    font-size: 1.1em;
+    font-family: Gudea;
+    width: 70px;
+    position: absolute;
+}
+
+/* minigrid styles */
+.minigrid {
+    position: relative;
+    display: table-cell;
+    border: 1px solid #fff;
+    border-width: 1px 0 0 1px;
+    -webkit-transform: scaleY(0.5) rotate(45deg);
+}
+
+.minigrid-wrapper {
+    display: inline-block;
+    float: right;
+    padding-top: 5px;
+    width: 65% !important;
+    /*background-color: white;*/
+}
+
+.minigrid div {
+    border: 1px solid #fff;
+    border-width: 0 1px 1px 0;
+    float: left;
+}
+
+.minigrid-active-cell {
+    background-color: white;
+}
+
+.editing-bar {
+    width: 40px;
+    background-color: #060A0A;
+    height: 250px;
+    border-radius: 8px;
+    border: 1px solid #FFF;
+    right: 5px;
+    top: 50%;
+    margin-top: -125px;
+    position: absolute;
+    opacity: 0.9;
+}
+
+.editing-bar .fa {
+    padding: 7px;
+    color: white;
+    font-size: 1.9em;
+}
+
+.editing-bar .fa:hover {
+    /*color: #7BF699;*/
+    color: #E3FF17 !important;
+    font-size: 1.95em;
+}
+
+.editing-mode-active {
+    color: #E3FF17 !important;
+}
+
+.circle {
+    font-family: "Gudea", monospace;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 30%;
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 2.5px;
+}
+
+.circle:hover {
+    background-color: #E3FF17;
+}
+
+.circle-anim {
+    -webkit-animation: spinZ 600ms, changeOpacity 600ms;
+}
+
+.circle span {
+    font-weight: bold;
+    width: inherit;
+    height: inherit;
+    vertical-align: middle;
+    z-index: 1;
+    position: absolute;
+    color: black;
+    text-align: center;
+    font-size: inherit;
+    line-height: 100%;
+}
+
+@-webkit-keyframes spinZ {
+    from { -webkit-transform: rotateY(0deg) }
+    to { -webkit-transform: rotateY(360deg) } 
+}
+
+@-webkit-keyframes changeOpacity {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,302 @@
+
+        # class Scenica extends Hal.Scene
+        #     constructor: (meta) ->
+        #         super(meta)
+
+        #     update: (delta) ->
+        #         super(delta)
+        #         @checkForCollisions()
+
+        # scenica = new Scenica 
+        #     world_bounds: [0, 0, 300, 300]
+        #     bg_color: "gray"
+        # scenica.attr("gravity", Hal.Vec2.from(0, 0))
+        # Hal.addScene(scenica)
+
+
+        # class SimpleEntity extends Hal.Shape
+        #     constructor: (meta) ->
+        #         super(meta)
+        #         @drawableOnState(Hal.DrawableStates.Stroke)
+        #         @drawableOnState(Hal.DrawableStates.Fill)
+
+#              @step = Math.PI/4 
+# +            @ang = 0
+# +            @sprite = Hal.asm.getSprite("unordered_warhorse")
+# +
+# +            @mass = 5
+# +            @gravity = Vec2.fromValues(0, 0)
+# +
+# +            @velocity = Vec2.fromValues(0.0001, 0.0001)
+# +            @max_vel = 3
+# +            @target = @pos
+# +            Vec2.sub(@velocity, @target, @pos)
+# +
+# +            @steering_f = Vec2.fromValues(0,0)
+# +
+# +            @max_steering_f = 0.2
+# +            @max_speed = 0.5
+
+            # followPath: (path) ->
+            #     if not @follow_path
+            #         @follow_path = Hal.addListener "ENTER_FRAME", (delta) =>
+            #             if (Math.abs(@pos[0] - @target[0]) < 10) and (Math.abs(@pos[1] - @target[1]) < 10)
+            #                 @target = path.shift()
+            #                 if not @target?
+            #                     Hal.removeListener "ENTER_FRAME", @follow_path
+            #                     @follow_path = null
+            #                     @target = @pos
+            #                     Vec2.sub(@velocity, @target, @pos)   
+            #                     return
+
+        # ent1 = new Hal.Shape()
+        # ent2 = new Hal.Shape()
+
+
+        # ent1.attr("angular_step", Math.PI/4)
+        # ent1.attr("mass", 5)
+        # ent1.attr("max_velocity", 3)
+        # ent1.attr("velocity", Hal.Vec2.from(0.001, 0.001))
+        # ent1.drawableOnState(Hal.DrawableStates.Stroke)
+        # ent1.setPosition(420, 190)
+        # ent1.setShape(Hal.geometry.createRegularPolygon(5, 25))
+
+        # ent2.drawableOnState(Hal.DrawableStates.Stroke)
+        # ent2.setPosition(230, 430)
+        # ent2.setShape(Hal.geometry.createRegularPolygon(8, 30))
+
+        # scenica.addEntityToQuadSpace(ent1)
+        # scenica.addEntityToQuadSpace(ent2)
+
+        # Hal.fadeInViewport(1000)
+        # Hal.debug(true)
+
+        # Hal.on "KEY_UP", (key) ->
+        
+        # sh = new Hal.Shape()
+        #  .setShape(Hal.geometry.createRegularPolygon(14, 50))
+        #  .setPosition(100, 400)
+
+        # sh1 = new Hal.Shape()
+        #  .setShape(Hal.geometry.createRegularPolygon(14, 50))
+        #  .setPosition(300, 400)
+
+
+
+        # line = new Hal.Line(0, -50)
+        # .setPosition(600, 300)
+        # line1 = new Hal.Line(50, 0)
+        # .setPosition(700, 400)
+
+        # sc = new Hal.Scene
+        #         "name": "whatever"
+        #         "bg_color": "gray"
+        #         "draw_quadspace": true
+        #         "draw_camera_center": true
+
+        # sh3 = new Hal.Shape().setShape(Hal.geometry.createStarPolygon(20, 8, 50))
+        # .setPosition(150, 150)
+        # #sc.setOrigin(sc.bounds[2]*0.5, sc.bounds[3]*0.5, true)
+        
+        # keysPressed = {}
+
+        # Hal.on "LEFT_CLICK", (pos) ->
+        #     # sh.requestUpdate()
+
+        #     line.transform()
+        #     line1.transform()
+
+        #     inverse1 = line.inverseTransform()
+        #     inverse2 = line1.inverseTransform()
+
+        #     # trans1 = Hal.Vec2.transformMat3([], pos, inverse1)
+        #     # trans2 = Hal.Vec2.transformMat3([], pos, inverse2)
+        #     trans1 = Hal.Vec2.transformMat3([], pos, inverse1)
+        #     trans2 = Hal.Vec2.transformMat3([], pos, inverse2)
+
+        #     console.log(trans1)
+        #     console.log(trans2)
+        #     inPoly1 = Hal.geometry.isPointInPolygon(trans1, line._mesh)
+        #     inPoly2 = Hal.geometry.isPointInPolygon(trans2, line1._mesh)
+        #     console.log("in sh: #{inPoly1}")
+        #     console.log("in sh1: #{inPoly2}")
+
+        # dir = Hal.Vec2.from(0, 0)
+
+        # Hal.on "KEY_UP", (key) ->
+        #     keysPressed[key.keyCode] = false
+        #     Hal.Vec2.set(dir, 0, 0)
+
+        # speed = 130
+        # Hal.on "KEY_DOWN", (key) ->
+        #     keysPressed[key.keyCode] = true
+        #     if (keysPressed[Hal.Keys.UP])
+        #         #sh.move(0, -5)
+        #         Hal.Vec2.set(dir, dir[0], -1)
+        #     if (keysPressed[Hal.Keys.DOWN])
+        #         Hal.Vec2.set(dir, dir[0], 1)
+        #         #sh.move(0, 5)
+        #     if (keysPressed[Hal.Keys.LEFT])
+        #         Hal.Vec2.set(dir, -1, dir[1])
+        #         #sh.move(-5, 0)
+        #     if (keysPressed[Hal.Keys.RIGHT])
+        #         Hal.Vec2.set(dir, 1, dir[1])
+        #         #sh.move(5, 0)
+        #     p1 = Hal.Vec2.acquire()
+        #     Hal.Vec2.scale(p1, dir, speed)
+        #     Hal.Vec2.copy(dir, p1)
+        #     Hal.Vec2.release(p1)
+
+        # Hal.on "ENTER_FRAME", (delta) ->
+        #     p1 = Hal.Vec2.acquire()
+        #     Hal.Vec2.scale(p1, dir, delta)
+        #     Hal.Vec2.copy(dir, p1)
+        #     Hal.Vec2.release(p1)
+
+        #     sh.move(dir[0], dir[1])
+
+        # sh2 = new Hal.Shape()
+        # concaveShape = [
+        #     [50, 0],
+        #     [15, 10],
+        #     [-30, -20],
+        #     [10, -87],
+        #     [20, -30]
+        # ]
+        # # center = Hal.geometry.polyMean(concaveShape)
+
+        # sh2.setShape(concaveShape).setPosition(800, 300)
+
+        # sc.addEntity(sh)
+        # sc.addEntity(sh1)
+        # sc.addEntity(line)
+        # sc.addEntity(line1)
+
+        # # sc.addEntity(sh2)
+        # sc.addEntity(sh3)
+
+        # scena1 = new Hal.Scene bg_color: "gray"
+        # loptica = new Hal.Shape({
+        #     sprite: Hal.asm.getSprite("konji/deer")
+        # })
+        # .setShape(Hal.geometry.createRegularPolygon(32, 30))
+        # .setPosition(0, -300)
+        # loptica.drawableOnState(loptica.DrawableStates.Sprite | loptica.DrawableStates.Stroke | loptica.DrawableStates.Fill)
+        # scena1.addEntity(loptica)
+        # loptica.attr("gravity", Hal.Vec2.acquire())
+        # loptica.attr("acceleration", Hal.Vec2.acquire())
+        # loptica.attr("velocity", Hal.Vec2.acquire())
+        # Hal.Vec2.set(loptica.gravity, 0, 19.81)
+        # Hal.Vec2.set(loptica.acceleration, 0, 9.5)
+        # Hal.Vec2.set(loptica.velocity, 0.0001, 0.01)
+
+        # #velocity += 0.5 * acceleration;
+        # #position += velocity;
+        # #velocity += 0.5 * acceleration;
+        # #v = v + a * dt
+        # #x = x + v * dt
+
+        # mass        = 7.9
+        # max_vel     = 10
+        # # max_speed   = 
+
+        # #steering_f = Vec2.fromValues(0,0)
+        # #max_steering_f = 0.2
+
+
+        # Hal.on "ENTER_FRAME", (delta) ->
+        #     Hal.Vec2.scale(loptica.velocity, loptica.velocity, max_vel)
+        #     Hal.Vec2.scale(loptica.gravity, loptica.gravity, mass)
+        #     Hal.Vec2.addAndScale(loptica.velocity, loptica.velocity, loptica.acceleration, mass*delta)
+        #     Hal.Vec2.add(loptica.position, loptica.position, loptica.velocity)
+        #     Hal.Vec2.normalize(loptica.velocity, loptica.velocity)
+        #     loptica._update_transform = true
+
+        # Hal.on "KEY_UP", (key) ->
+        #     if key.keyCode is Hal.Keys.SPACE
+        #         loptica.tween
+        #             attr: "position[1]"
+        #             from: loptica.position[1]
+        #             to: loptica.position[1] - 100
+        #             duration: 900
+        #             repeat: 1
+        #         .done () ->
+        #             @tween
+        #                 attr: "position[1]"
+        #                 from: loptica.position[1]
+        #                 to: loptica.position[1] + 100
+        #                 duration: 900
+        #                 repeat: 1
+
+        # class Scenica extends Hal.Scene
+        #     constructor: (meta) ->
+        #         super(meta)
+        #     init: () ->
+        #         super()
+        #         @attr("bg_color", "gray")
+
+
+        
+        # sc.attr("rect_search", 150)
+        # sc.attr("simple_poly", [
+        #     [100, 100, 1],
+        #     [150, 100, 1],
+        #     [150, 150, 1],
+        #     [100, 150, 1]
+        # ])
+
+        # sc.attr("simple_rect", [
+        #     200,
+        #     200,
+        #     50,
+        #     50
+        # ])
+
+        # e = new Hal.SpriteEntity(sprite: "konji/deer")
+        # e1 = new Hal.SpriteEntity(sprite: "konji/horse")
+        # sc.addEntityToQuadspace(e1)
+        # sc.addEntityToQuadspace(e)
+
+        # # sc.attr("simple_poly", Hal.math.transformPoly(sc.simple_poly, 
+        # #  Matrix3.translate(-centroid[0], -centroid[1])
+        # # ))
+        # # sc.attr("simple_poly", Hal.math.transformPoly(sc.simple_poly, 
+        # #  Matrix3.rotate(Math.PI/17, 0, 0)
+        # # ))
+        # # sc.attr("simple_poly", Hal.math.transformPoly(sc.simple_poly, 
+        # #  Matrix3.translate(centroid[0], centroid[1])
+        # # ))
+
+        # sc.on "LEFT_CLICK", (pos) ->
+
+        #     # cp = e1.worldToLocal(@localToWorld(@world_pos))
+        #     # cp[0] -= @rect_search*0.5
+        #     # cp[1] -= @rect_search*0.5
+        #     # e1.addShape([
+        #     #  [cp[0], cp[1]],
+        #     #  [cp[0], cp[1] + @rect_search],
+        #     #  [cp[0] + @rect_search, cp[1] + @rect_search], 
+        #     #  [cp[0] + @rect_search, cp[1]]
+        #     # ])
+        #     llog @world_pos
+        #     ents_in_range = @quadspace.searchInRange(@world_pos, @rect_search, @)
+        #     llog ents_in_range.length
+
+        # # sc.update = (delta) ->
+
+        # sc.draw = (delta) ->
+        #     @applyIdentity()
+        #     # rect = [@mpos[0], @mpos[1], @rect_search, @rect_search]
+        #     # pos = e1.worldToLocal(@localToWorld(@world_pos))
+        #     #rect = [pos[0] + @rect_search*0.5, pos[1] - @rect_search*0.5, @rect_search, @rect_search]
+        #     # @g.strokeRectHW(rect, "yellow")
+        #     # center = Hal.math.polyCentroid(@simple_poly)
+        #     # @g.strokePolygonO(@simple_poly, center[0], center[1], "red")
+        #     @g.strokeRectO(@simple_rect, "white")
+
+        # Hal.addScene(sc)
+        # e1.attr("x", 100)
+        # e.attr("y", 50)
+        # e.attr("x", 100)
+        # Hal.fadeInViewport(1000)
+        # Hal.start()

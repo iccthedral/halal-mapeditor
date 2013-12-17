@@ -1,0 +1,1023 @@
+.hud {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*body { background: #000 url("../img/map_city.png") no-repeat top center;  width: 100%; height: 100%; margin: 0px; min-width: 760px; min-height: 710px; }*/
+.index-body { background: #000 url("../img/index/BG.png") no-repeat top center;  width: 100%; height: 100%; margin: 0px; min-width: 760px; min-height: 710px; }
+
+/* REGISTER */
+
+.login-content { position: absolute; width: 1200px; height: 647px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; }
+.register-box { background-image: url("../img/index/register-window.png"); position: relative; float: left; width: 300px; height: 400px; margin: 100px 0 0 135px; }
+.register-name { position: relative; float: left; clear: left; width: 115px; font-size: 14px; color: white; margin: 10px 0 0 15px; }
+.register-input { position: relative; float: left; width: 115px; font-size: 14px; color: white;  outline: 0; border: 0px; background-color: #0f0903; top: -1px; margin-top: 10px; }
+.radio-button { position: relative; float: left; margin-top: 10px }
+
+.sub-choices { position: relative; float: left; margin: 0 0 0 115px; display: none; }
+.register-button {  background-image: url("../img/dialog/trade-station/dugme-neutral.png"); position: relative; margin: 0 auto; clear: both; width: 127px; height: 31px; top: 45px; color: white; line-height: 30px; text-align: center; cursor: pointer; }
+
+.media-preview-box { background-image: url("../img/index/preview.png"); position: relative; float: left; width: 600px; height: 400px; margin: 100px 0 0 30px; }
+.media-preview { position: relative; margin: 0 auto; width: 500px; }
+.validation-message { font-size: 0.9em; position: relative; top: 5px; text-align: center; color: #d4ae71; width: 295px; float: left  }
+
+
+/* LOGIN */
+
+.login-box { background-image: url("../img/index/register-window.png"); position: relative; width: 300px; height: 400px; margin: 0 auto; }
+.check-button { position: relative; float: left; clear: left; margin-left: 131px; }
+.remember-me { position: relative; float: left; font-size: 12px; color: white; top: 2px; }
+.forgot-user-id { position: relative; float: left; clear: left; margin-left: 16px; font-size: 12px; color: white; top: 10px; }
+
+/* ACTION BOX */
+
+.action-box { position: absolute; top: 200px; right: 200px; display: none; }
+.action-box-img { margin: auto; top: 0; left: 0; bottom: 0; right: 0; }
+
+/* DIALOG */
+
+
+.close-button { background-image: url("../img/dialog/commander/x-button.png"); position: absolute; float: left; left: 35px; top: 2px; width: 25px; height: 25px; cursor: pointer; }
+.move-button { margin-top: 10px!important; }
+.forge-button { margin-top: 20px!important; position: relative!important; float: left!important; margin-left: 5px!important; }
+.no-margin-button { margin-top: 0px!important; }
+.favourite-button { margin-top: 17px!important; }
+
+.action-button { cursor: pointer; }
+.action-button-left { background-image: url("../img/button-left.png"); float: left; width: 12px; height: 18px; }
+.action-button span { background-image: url("../img/button-middle.png"); float: left; height: 18px; line-height: 18px; font-size: 12px; color: #d4ae71; }
+.action-button-right { background-image: url("../img/button-right.png"); float: left; width: 12px; height: 18px; }
+
+.action-button-left-r { background-image: url("../img/button-left.png"); float: right; width: 12px; height: 18px; }
+.action-button-r span { background-image: url("../img/button-middle.png"); float: right; height: 18px; line-height: 18px; font-size: 12px; color: #d4ae71; }
+.action-button-right-r { background-image: url("../img/button-right.png"); float: right; width: 12px; height: 18px; }
+
+.action-button-1 { position: relative; margin: 0 auto; top: -5px; }
+.action-button-2 { position: absolute; left: 45px; top: 15px; width: 300%; }
+.action-button-3 { position: absolute; left: 57px; top: 40px; width: 300%; }
+.action-button-4 { position: absolute; left: 45px; top: 65px; width: 300%; }
+.action-button-5 { position: relative; margin: 0 auto; }
+.action-button-6 { position: absolute; right: 45px; top: 15px; width: 300%; }
+.action-button-7 { position: absolute; right: 57px; top: 40px; width: 300%; }
+.action-button-8 { position: absolute; right: 45px; top: 65px; width: 300%; }
+
+/* Trade */
+
+.trade-station { background-image: url("../img/dialog/trade-station/trade-station-box1.png"); position: absolute; width: 724px; height: 475px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+
+.trader-info { position: relative; float: left; display: block; margin-top: 14px; }
+
+.dialog-name { position: relative; width: 100%; height: 30px; text-align: center; }
+.dialog-name span, .trade-station-name span, .ro-name span { font-size: 18px; color: white!important; line-height: 30px; }
+.trade-station-name { position: relative; float: left; width: 340px; height: 30px; text-align: center; margin-top: 2px; }
+
+.trader { position: relative; float: left; clear: left; width: 104px; height: 155px; text-align: center; margin-left: 13px; }
+.trader img { position: relative; top: 22px;  }
+.trader-name { position: relative; top: 22px; color: white; font-size: 14px; }
+.level-name { position: relative; top: 22px; color: white; font-size: 12px; margin-right: 5px }
+.level-value { position: relative; top: 22px; color: white; font-size: 12px;  }
+
+.trade-goods-own { position: relative; float: left; width: 215px; height: 110px; margin: 8px 0 0 3px; }
+.trade-goods-inventory { position: relative; float: left; clear: left; width: 320px; height: 110px; margin: 11px 0 0 14px; }
+
+.load-unload { position: relative; float: left; margin-top: -18px; margin-left: 128px; clear: left; }
+.unload { background-image: url("../img/dialog/trade-station/button-unload.png"); position: relative; float: left; margin-right: 15px; width: 38px; height: 19px; cursor: pointer; }
+.load { background-image: url("../img/dialog/trade-station/button-load.png"); position: relative; float: left; width: 38px; height: 19px; margin-right: 12px; cursor: pointer; }
+
+.gold-name { position: relative; float: left; margin-top: -38px; text-align: right; width: 103px; }
+.gold-name span { font-size: 14px; color: white; margin-right: 5px; }
+.gold-amount { position: relative; margin-top: -18px; text-align: center; left: 228px; width: 103px; float: left; clear: left; }
+.gold-amount span { font-size: 16px; color: #ffdc9f; }
+
+.load-text { position: absolute; top: 309px; left: 16px; width: 103px; text-align: center; }
+.load-text span { color: white; font-size: 14px; }
+
+.available-traders { position: relative; float: left; height: 402px; width: 229px; text-align: center; top: 11px; }
+.available-traders-name { font-size: 18px; color: white; line-height: 40px; }
+
+.available-traders-box { position: relative;margin: 0 auto; width: 237px; height: 76px; background-color: rgba(0,0,0,0.5); margin-bottom: 10px; }
+.available-traders-box img { position: relative; float: left; margin: 4px 0px 5px 5px; }
+
+.available-trader-info { position: relative; float: left; width: 129px; height: 78px; }
+.trader-name-b { position: relative; color: white; font-size: 25px; top: 13px; }
+.level-name-b { position: relative; color: white; font-size: 18px; margin-right: 5px; top: 13px; }
+.level-value-b { position: relative; color: white; font-size: 18px; top: 13px; }
+
+.trade-building-info { position: relative; float: left; width: 145px; height: 402px; margin: 10px 0 0 10px; }
+.training-building-info { position: relative; float: left; width: 150px; height: 402px; top: -60px; }
+.tavern-building-info, .war-building-info { position: relative; float: left; width: 133px; height: 402px; top: 0px; }
+.port-building-info { position: relative; float: left; width: 133px; height: 222px; top: 20px; }
+.majlis-building-info { position: relative; float: left; width: 133px; height: 222px; top: -5px; }
+
+.dialog-building-img { position: relative; margin: 0 auto; margin-top: 33px; display: block; }
+.dialog-building-img-2 { position: relative; margin: 0 auto; margin-top: 33px; display: block; }
+.upgrade-building { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); position: relative; margin: 0 auto; width: 127px; height: 31px; margin-top: 40px; color: white; line-height: 30px; text-align: center; cursor: pointer; }
+
+/* Tavern */
+
+.tavern { background-image: url("../img/dialog/tavern/tavern-box.png"); position: absolute; width: 582px; height: 594px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; background-color: #53422f; display: none; }
+
+.tavern-tabs { position: relative; float: right; right: 125px; top: 4px; }
+.bars { background-image: url("../img/dialog/tavern/bars.png"); position: absolute;  width: 423px; height: 478px; }
+
+.tavern-info, .war-commander-info { position: relative; float: left; width: 423px; height: 475px; margin-top: 7px; margin-left: 20px; }
+.tavern-info table { position: relative; float: left; clear: left; width: 100%; color: white; text-align: center; }
+.tavern-info td { width: 33%; position: relative; top: 1px; }
+.tavern-hero-img { background-image: url("../img/hero-window/hero-icon-1.png"); position: relative; width: 49px; height: 65px; top: 3px; margin: 0 auto; cursor: pointer; }
+.tavern-hero-table-name { position: relative; margin: 0 auto; top: -10px; }
+.tavern-hero-name { position: absolute; top: 50px; right: 85px; }
+.statistics { position: relative; margin: 0 auto; margin-right: 5px; }
+.employ-button { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); width: 127px; height: 31px; position: relative; float: left; clear: left; text-align: center; color: white; margin-top: 10px; left: 177px; line-height: 30px; cursor: pointer; }
+
+.tr-click-bg { background: rgba(155,36,36,0.3)!important; }
+
+tr:nth-child(even) {background: transparent; }
+tr:nth-child(odd) {background: rgba(0,0,0,0.2);}
+
+/* Training */
+
+.training { background-image: url("../img/dialog/training/training-box.png"); position: absolute; width: 630px; height: 540px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.trainer-statistic { position: relative; float: left; width: 222px; height: 70px; margin: 26px 0px 0px 40px; }
+.training-reserve { position: relative; float: left; margin: 39px 3px 3px 3px; cursor: pointer; }
+.trainer-avatar { position: relative; float: right; margin: 3px; }
+
+.trainers-name-level { position: relative; display: block; float: left; margin-left: 10px; }
+.traniers-name { color: #d4ae71; position: relative; float: left; font-size: 16px;  margin-right: 10px; }
+.traniers-level { color: white; position: relative; float: left; font-size: 16x; margin-right: 5px; }
+.traniers-level-value { color: white; position: relative; float: left; font-size: 16px;}
+.tranier-stat { position: relative; float: left; clear: left; }
+.tranier-stat-name { position: relative; float: left; margin-left: 6px; }
+.tranier-stat-name span { position: relative; float: left; clear: left; font-size: 12px; color: white  }
+.tranier-stat-value { position: relative; float: left; }
+.tranier-stat-value span { position: relative; float: left; clear: left; font-size: 12px; color: white }
+
+.price-name { color: #d4ae71!important; }
+.br-span { margin-top: 18px; }
+
+.training-troop { position: relative; float: left; clear: right; width: 444px; height: 339px; margin: 13px 0px 0px 36px; }
+.selected-troop { position: relative; float: left; width: 221px; height: 322px; }
+.selected-troop img { position: relative; margin: 15px 0 0 23px; }
+
+.select-troops { position: relative; float: right; width: 222px; height: 321px; }
+.select-troops img { margin: 1.5px; cursor: pointer; }
+
+.available-unit-info { background-image: url("../img/dialog/training/available-unit-box-passive.png"); position: absolute; width: 216px; height: 88px; bottom: 0px; left: 2px; }
+.available-unit-info img { position: relative; float: right; clear: right; }
+.available-unit-name, .war-level-name, .war-level-value  { color: #d4ae71; position: relative; float: left; font-size: 16px;  margin-right: 10px; line-height: 25px; margin-left: 4px; }
+
+.unit-info-name, .unit-info-value { position: relative; float: left; top: 14px; margin-left: 10px; }
+.unit-info-name span, .unit-info-value span, .war-unit-info-name span, .war-unit-info-value span { position: relative; float: left; clear: left; color: white; font-size: 12px; }
+
+.troop-price { position: relative; float: left; clear: left; width: 220px; height: 25px; margin: 4px 0px 0px 0px; text-align: center; }
+.troop-price span { font-size: 12px; color: white; line-height: 25px; }
+.troop-price .value { margin: 0 10px 0 0; }
+
+.ver-box { position: absolute; right: 0px; top: -20px; display: block; }
+.ver-box span { position: relative; float: right; color: white; padding: 2px; border: 1px solid white; margin: 1px; font-size: 12px; line-height: 12px; cursor: pointer; }
+
+.slider-amount { position: relative; width: calc(100% - 18px); left: 8px; display: block; margin-top: 1px; float: left; }
+.troop-slider { position: relative; float: left;; width: 228px; height: 12px; margin-top: 6px; }
+.min-max { position: relative; float: left; color: white; font-size: 14px; line-height: 24px; margin: 0px 5px 0px 5px; }
+.troop-amount { position: relative; float: right; border: none; color: white; background-color: transparent; width: 34px; outline: 0; margin-right: 5px; font-size: 12px; text-align: right; line-height: 19px; }
+.amount-name { position: relative; float: right; color: white; font-size: 14px; line-height: 24px; margin-right: 32px; }
+.troop-bar-full { background-image: url("../img/dialog/training/bar-full.png"); width: calc(50% - 7px); height: 6px; position: relative; float: left; top: 4px; left: 4px; }
+
+.train-button-box { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); position: absolute; width: 127px; bottom: 5px; height: 31px; color: white; line-height: 30px; text-align: center; cursor: pointer; left: 193px; }
+
+
+/* Commander */
+
+.commander { background-image: url("../img/dialog/commander/commander.png"); position: absolute; width: 531px; height: 700px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.commander-inventory { position: relative; float: left; margin: 0px 0px 0px 31px; width: 225px; height: 333px; clear: left; }
+.commander-inventory img, .commander-troops img, .trader-inventory img, .trade-point-inventory img, .trade-goods-own img, .trade-goods-inventory img { position: relative; float: left; margin: 5px; cursor: pointer; z-index: 1; }
+.trader-inventory img { top: 0px!important;  }
+
+.commander-troops { position: relative; float: left; clear: left; margin: 27px 0px 0px 31px; width: 280px; height: 115px;  }
+
+.attach-agent { position: relative; float: left; margin: 23px 0px 0px 82px; width: 114px; height: 114px; }
+.attach-agent img, .trader-img img, .sale-trade-good img, .trade-point-avatar img { position: absolute; margin: auto; top: 0; left: 0; bottom: 0; right: 0;  }
+
+.commander-info { position: relative; float: left; width: 211px; height: 97px; margin: 27px 10px 10px 36px; background-color: rgba(0,0,0,0.5); }
+.commander-img { position: relative; margin-left: 66px; margin-top: 77px; }
+
+.commander-expirience-name, .commander-level-name, .commander-level-value, .commander-current-expirience, .commander-max-expirience { position: relative; color: white; font-size: 14px; margin: 2px; display: inline; line-height: 24px; }
+
+.commander-name { position: relative; float: left; margin: 25px 0 0 23px; width: 228px; height: 50px; text-align: center; }
+.commander-name span { position: relative; line-height: 50px; font-size: 25px; color: white; }
+
+.commander-equipment { position: relative; float: left; margin: -48px 0 0 21px; width: 230px; height: 353px; }
+.equipment-holder { position: absolute; top: 15px; left: 17px; }
+
+.commander-exp-bar-box { position: relative; float: left; width: 230px; height: 24px; margin: 4px 0 0 23px; }
+.commander-bar { background-image: url("../img/dialog/commander/exp-bar.png"); position: absolute; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 228px; height: 12px; }
+.commander-bar-full { background-image: url("../img/dialog/commander/bar-full.png"); width: calc(50% - 7px); height: 6px; position: relative; float: left; top: 4px; left: 4px; }
+
+.equipment-box-b { position: absolute; width: 50px; height: 50px; }
+.equipment-box-s { position: absolute; width: 30px; height: 30px; }
+.head { top: 15px; left: 92px; }
+.back { top: 58px; left: 167px; }
+.l-hand { top: 157px; left: 167px; }
+.r-hand { top: 126px; left: 17px; }
+.torso { top: 101px; left: 93px; }
+.legs { top: 196px; left: 92px; }
+.boots { top: 277px; left: 92px; }
+.neck { top: 68px; left: 102px; }
+.l-ring { top: 211px; left: 175px; }
+.r-ring { top: 180px; left: 28px; }
+
+
+.commander-statistics { position: relative; float: right; width: 100%; height: auto; text-align: left; }
+.commander-statistics-name { position: relative; color: #d4ae71; font-size: 18px; float: right; }
+
+/* Trader */
+
+.trader-screen { background-image: url("../img/dialog/commander/trader.png"); position: absolute; width: 410px; height: 524px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.trader-inventory { position: relative; float: left; margin: -2px 0px 0px 31px; width: 221px; height: 219px; clear: left; }
+.trader-inventory-info { position: relative; float: left; clear: left; width: 207px; height: 76px; margin: 5px 0 0 40px; text-align: left; }
+.trader-inventory-info span { color: white; font-size: 12px; }
+
+.trader-img { position: relative; float: left; margin: 17px 0px 0px 20px; width: 114px; height: 114px; }
+.trader-bar-box { position: relative; float: left; margin: 8px 0px 0px 20px; width: 120px; height: 12px; }
+.trader-bar { background-image: url("../img/dialog/commander/exp-bar-2.png"); position: absolute; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 120px; height: 12px; }
+.trader-bar-full { background-image: url("../img/dialog/commander/bar-full-2.png"); width: calc(50% - 7px); height: 6px; position: relative; float: left; top: 4px; left: 4px; }
+
+.weight-money { position: relative; float: left; margin: 18px 0px 0px 20px; width: 120px; height: 80px; text-align: center; color: white; font-size: 14px; }
+
+
+/* Agent */
+
+.agent { background-image: url("../img/dialog/commander/agent.png"); position: absolute; width: 410px; height: 524px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.agent .trader-inventory { position: relative; float: left; margin: -2px 0px 0px 31px; width: 221px; height: 113px; clear: left; }
+.agent .trader-inventory-info { position: relative; float: left; clear: left; width: 207px; height: 183px; margin: 6px 0 4px 38px; text-align: left; }
+.agent .trader-inventory-info span { position: relative; float: left; font-size: 16px; color: #ffdc9f; width: 100px; }
+.trader-inventory-info span { color: white; font-size: 12px; }
+
+.agent .trader-img { position: relative; float: left; margin: 17px 0px 0px 16px; width: 114px; height: 114px; }
+.agent .trader-bar-box { position: relative; float: left; margin: 13px 0px 0px 27px; width: 120px; height: 12px; }
+
+
+
+/* Science Tent */
+
+.science-tent { background-image: url("../img/dialog/commander/science-tent.png"); position: absolute; width: 500px; height: 524px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.science-tabs { position: relative; float: right; right: 134px; top: 6px; }
+
+.science-tent-content { position: relative; float: left; clear: left; margin: 19px 14px 0 34px; width: 310px; height: 416px; }
+.science-tent-content-box { position: relative; float: left; width: 310px; height: 104px; }
+.science-tent-content-box img { position: relative; float: left; margin-top: 19px; }
+.st-info-name, .st-info-value { position: relative; float: left; margin: 22px 0 0 15px; }
+.st-info-name span, .st-info-value span { position: relative; float: left; clear: left; font-size: 12px; color: white; }
+
+
+/* Main Tent */
+
+.main-tent { background-image: url("../img/dialog/commander/main-tent.png"); position: absolute; width: 550px; height: 524px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.main-tent-content { position: relative; float: left; clear: left; margin: 17px 14px 0 33px; width: 361px; height: 425px; }
+.main-tent-content span { position: relative; float: left; font-size: 16px; color: #ffdc9f; width: 100px; }
+.main-tent-content-value { color: white!important }
+
+/* Port */
+
+.port { background-image: url("../img/dialog/commander/port.png"); position: absolute; width: 410px; height: 382px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.port-content { position: relative; float: left; clear: left; margin: 30px 10px 0 24px; width: 231px; height: 285px; text-align: center; }
+.port-content span { position: relative; font-size: 18px; color: #d4ae71; margin-top: 10px; display: block; }
+.port-content-info { font-size: 12px!important; color: white!important; margin-top: 5px!important; display: inline!important; }
+.fishing-boat-button { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); width: 127px; height: 31px; position: relative; margin: 0 auto; clear: both; text-align: center; color: white; margin-top: 7px;  line-height: 30px; cursor: pointer; }
+.active-boats { position: relative; margin: 0 auto; width: 161px; height: 64px; }
+.active-boats div { position: relative; float: left; width: 27px; height: 27px; margin: 2.5px; }
+.active-boats img { position: relative; margin: 1px; }
+
+/* Warehouse */
+
+.warehouse { background-image: url("../img/dialog/commander/warehouse.png"); position: absolute; width: 481px; height: 577px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.resource-overview { position: relative; float: left; clear: left; margin: 29px 10px 0 29px; width: 298px; height: 187px; }
+.ro-name { position: relative; width: 100%; height: 22px; text-align: center; }
+.ro-name span { line-height: 22px!important; }
+
+.warehouse table { width: 298px; height: 165px; }
+.warehouse td { width: 30%; font-size: 14px; color: white; text-align: center; }
+
+.storage-capacity { position: relative; float: left; clear: left; margin: 10px 10px 0 29px; width: 298px; height: 232px; }
+.total-capacity-name { position: relative; margin: 8px 0 0 100px; display: block; font-size: 16px; color: white; }
+.storage-exp-bar-box { position: relative; margin: 0 auto; width: 230px; height: 15px; }
+.storage-sub-exp-bar-box { position: relative; float: left; width: 120px; height: 24px; }
+
+.max-capacity { position: relative; float: left; margin-left: 37px; font-size: 14px; color: white; }
+.min-capacity { position: relative; float: right; margin-right: 37px; font-size: 14px; color: white; }
+
+.single-capacity { position: relative; margin: 0 auto; clear: left; width: 212px; height: 25px; margin-top: 5px; }
+.single-capacity img { position: relative; float: left; margin-left: 10px; margin-top: -9px; }
+.single-max-min { position: relative; float: left; font-size: 12px; margin: -2px 3px 0 3px; color: white; }
+.commander-bar-2 { background-image: url("../img/dialog/commander/exp-bar-2.png"); position: absolute; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 120px; height: 12px; }
+.commander-bar-full-2 { background-image: url("../img/dialog/commander/bar-full-2.png"); width: calc(50% - 7px); height: 6px; position: relative; float: left; top: 4px; left: 4px; }
+
+
+/* Fdsw */
+
+.fdsw { background-image: url("../img/dialog/commander/fdsw.png"); position: absolute; width: 391px; height: 320px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.fdsw-content { position: relative; float: left; clear: left; margin: 39px 10px 0 25px; width: 212px; height: 228px; text-align: center; }
+.fdsw-content span { font-size: 16px; color: white; line-height: 30px; }
+
+
+/* Forge */
+
+.forge { background-image: url("../img/dialog/commander/forge.png"); position: absolute; width: 513px; height: 350px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.forge-content { position: relative; float: left; clear: left; margin: 31px 10px 0 25px; width: 334px; height: 258px; text-align: center; }
+
+.forge-content-box { position: relative; float: left; width: 100%; height: 71px; margin: 7px 0 8px 0; }
+.forge-content-box select { outline: 0; background-color: #372f25; color: white; border: 1px solid #ffdc9f; width: 115px; float: left; margin: 30px 0 0 5px; -webkit-appearance: none; -moz-appearance: none; background: url("../img/dialog/commander/drop-down-button.png") no-repeat; background-position: 94px -1px;  text-indent: 0.01px; text-overflow: "";  }
+.forge-content-box option { outline: 0; background-color: #372f25; color: white; border: 0px; -webkit-appearance: none; -moz-appearance: none; left: 1px; }
+.forge-frame { background-image: url("../img/dialog/commander/forge-frame.png"); position: relative; float: left; width: 71px; height: 71px; margin-left: 5px; }
+.forge-content-box img { position: absolute; margin: auto; top: 0; left: 0; bottom: 0; right: 0; height: 65px; }
+.forge-names { position: absolute; width: 115px; height: 12px; top: 11px; left: 137px; }
+.forge-names span { position: relative; margin: 0 auto; font-size: 14px; color: white; }
+
+
+/* Majlis */
+
+.majlis { background-image: url("../img/dialog/majlis/majlis.png"); position: absolute; width: 751px; height: 427px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; }
+.majlis-tabs { position: relative; float: right; right: 147px; top: 4px; }
+
+.majlis-tribe { position: relative; float: left; clear: left; margin: 7px 18px 0 25px; width: 565px; height: 339px; display: none; }
+.tribe-table { background-image: url("../img/dialog/majlis/tribe-table.png"); position: relative; width: 565px; height: 284px; }
+.tribe-table table, .alliance-table table { width: 100%; }
+.tribe-table td { width: 14%; text-align: center; color: white; }
+.tribe-table th { height: 47px; width: 14%; }
+.tribe-bottom { position: relative; display: table; clear: left; margin: 7px auto; height: 62px;  }
+.tribe-bottom-button { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); width: 127px; height: 31px; position: relative; float: left; text-align: center; color: white; line-height: 30px; cursor: pointer; }
+.tribe-bottom span { position: relative; float: left; margin: 6px; background-color: #53422f; color: white; padding: 0 5px 0 5px; cursor: pointer; }
+.tribe-bottom input {  position: relative; float: left; margin: 5px; background-color: #1e1000; color: white; width: 100px; height: 20px; border: 0px; outline: 0; }
+
+
+
+.majlis-alliance { position: relative; float: left; clear: left; margin: 7px 18px 0 25px; width: 565px; height: 339px; display: none; }
+.alliance-table { background-image: url("../img/dialog/majlis/alliance-table.png"); position: relative; float: left; width: 484px; height: 284px; }
+.alliance-table td { width: 16%; text-align: center; color: white; }
+.alliance-table th { height: 47px; width: 16%; }
+.alliance-left { position: relative; float: left; width: 100px; height: 284px; margin-left: -19px; }
+.alliance-left-button { background-image: url("../img/dialog/majlis/button.png"); width: 100px; height: 20px; position: relative; float: left; color: white; cursor: pointer; font-size: 12px; text-align: center; line-height: 20px; margin-top: 30px; }
+.alliance-bottom {  position: relative; display: table; clear: left; float: left; margin: 15px 0 0 132px; height: 62px; }
+
+
+
+.majlis-protection { position: relative; float: left; clear: left; margin: 7px 18px 0 25px; width: 565px; height: 339px; }
+.protection-table { background-image: url("../img/dialog/majlis/protection-table.png"); position: relative; width: 565px; height: 347px; }
+.big-headline { position: relative; float: left; width: 279px; height: 45px; text-align: center; }
+.big-headline2 { position: relative; float: left; width: 279px; height: 45px; text-align: center; }
+.big-headline span { color: white; line-height: 45px; }
+.big-headline2 span { color: white; position: relative; top: 2px; }
+.protection-members { position: relative; float: left; clear: left; width: 279px; height: 159px; }
+.protection-members .dialog-name, .protection-candidates .dialog-name { height: 25px; top: -4px; }
+.members-name { position: relative; float: left; clear: left; color: white; font-size: 14px; margin: 5px 0 0 10px; }
+.next-level, .benefits { position: relative; float: left; width: 143px; height: 168px; }
+.protection-candidates { position: relative; float: left; clear: left; width: 279px; height: 139px; top: -10px; }
+.protection-buttons-box { position: relative; float: left; width: 283px; height: 130px; }
+.protection-buttons-box .tribe-bottom-button { margin: 20px 7px 0 7px; }
+.protection-buttons-box .favourite-button { clear: both; top: 20px; }
+
+
+/* Garrison */
+
+.garrison { background-image: url("../img/dialog/commander/garrison.png"); position: absolute; width: 472px; height: 350px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.garrison-content { position: relative; float: left; clear: left; margin: 31px 10px 0 28px; width: 290px; height: 258px; text-align: center; }
+
+.garrison-content-box { position: relative; width: 276px; height: 83px; margin: 0 auto; }
+.garrison-content-box span { position: relative; float: left; font-size: 16px; color: white; margin: 5px 0 6px 7px; }
+
+.garrison-inventory { position: relative; float: left; width: 276px; height: 53px; }
+.garrison-inventory img { position: relative; float: left; margin: 3px 4.5px 0 5.5px; }
+
+/* Arabian Medicine Tent */
+
+.arabian-medicine-tent { background-image: url("../img/dialog/commander/arabian-medicine-tent.png"); position: absolute; width: 481px; height: 461px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.medicine-overview { position: relative; float: left; clear: left; margin: 29px 10px 0 29px; width: 298px; height: 256px; }
+.medicine-overview table { width: 100%; }
+.price-status-box { position: relative; float: left; clear: left;  margin: 18px 10px 0 29px; width: 298px; height: 81px; }
+.price-status { position: relative; float: left; width: 147px; margin: 1px; height: 79px; text-align: center; }
+.price-status span { font-size: 14px; color: white; }
+
+.one-third { width: 33%; font-size: 14px; color: white; text-align: center; }
+.two-thirds { width: 67%; font-size: 14px; color: white; text-align: center; }
+
+/* Market Tent */
+
+.market-tent { background-image: url("../img/dialog/commander/market-tent.png"); position: absolute; width: 556px; height: 382px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.trade-boxes { position: relative; float: left; clear: left; margin: 27px 0 0 18px; width: 392px; height: 193px;  }
+
+.market-tent-name-1 { position: relative; float: left; margin: 1px 0 0 9px; width: 173px; height: 19px; text-align: center; }
+.market-tent-name-2 { position: relative; float: right; margin: 1px 9px 0 0; width: 173px; height: 19px; text-align: center; }
+.market-tent-name-1 span, .market-tent-name-2 span { color: white; font-size: 16px; }
+
+.server-items { position: relative; float: left; clear: left;  margin: 21px 0 0 17px; width: 156px; height: 130px; }
+.player-items { position: relative; float: right;  margin: 21px 17px 0 0; width: 156px; height: 130px; }
+
+.item-box { position: absolute; width: 48px; height: 62px; }
+.item-box img { position: relative; float: left; width: 48px; height: 48px; }
+.item-box input { position: relative; float: left; clear: left; width: 35px; height: 12px; margin: 2px 0 0 6px; text-align: center; font-size: 10px; color: white;  outline: 0; border: 0px; background-color: transparent; }
+
+.ietm-box-2 { left: 54px; }
+.ietm-box-3 { left: 108px; }
+.ietm-box-4 { left: 28px; bottom: 0px; }
+.ietm-box-5 { left: 82px; bottom: 0px; }
+.ietm-box-6 { left: 15px; top: 5px }
+.ietm-box-7 { right: 13px; top: 5px  }
+
+.current-trade { position: relative; float: left; clear: left; margin-left: 18px; width: 392px; height: 95px; }
+.market-tent-slider-box { position: absolute; bottom: 0px; }
+.market-tent-slider { position: relative; float: left;; width: 325px; height: 12px; margin-top: 6px; }
+
+/* Trade Point */
+
+.trade-point { background-image: url("../img/dialog/trade-point/trade-box.png"); position: absolute; width: 581px; height: 414px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+
+.load-money { position: relative; float: left; margin: 33px 0px 0px 27px; width: 384px; height: 21px; }
+.load-money span { position: relative; float: left; margin: 5px; color: white; font-size: 14px; line-height: 10px; }
+
+.trade-point-avatar { position: absolute; top: 64px; right: 28px; width: 114px; height: 114px;  }
+
+.merchant, .trade-p { position: relative; float: left; clear: left; margin: 5px 0px 0px 27px; width: 384px; height: 145px; }
+.merchant input, .trade-p input {  outline: 0; border: 0px; position: relative; float: left; clear: left; width: 48px; height: 15px; color: white; font-size: 14px; line-height: 3px; background-color: transparent;  margin: 5px 0px 0px 30px; text-align: right; }
+.sale-trade-good { position: relative; float: left; margin: 9px 0px 0px 13px; width: 82px; height: 82px;  }
+.good2 { margin: 14px 0px 0px 13px; }
+.trade-point-slider-bar { position: relative; float: left; clear: left; width: 82px; height: 13px; margin: -17px 0px 0px 10px; }
+
+.trade-point-inventory { position: relative; float: left; width: 277px; height: 115px;  margin-left: 12px; }
+
+.sell-button { background-image: url("../img/dialog/trade-station/dugme-neutral.png"); position: relative; float: left; width: 127px; height: 31px; color: white; line-height: 30px; text-align: center; cursor: pointer; }
+.sell-all { margin-top: -25px; margin-left: 111px; }
+.sell { margin-top: -31px; margin-left: 250px; }
+.buy { margin-top: -25px; margin-left: 182px; }
+
+/* War */
+
+.war-commander { background-image: url("../img/dialog/war/commanders-tab/commander-box.png"); position: absolute; width: 582px; height: 594px;  margin: auto; top: 0; left: 0; bottom: 0; right: 0; display: none; }
+.war-commander-info tr, .war-commander-info td  { width: 100%; height: 96px; display: block; }
+.war-commander-info table { position: relative; float: left; clear: left; width: 100%; color: white; text-align: center; }
+
+
+.war-troops { background-image: url("../img/dialog/war/commanders-tab/war-troops-img.png"); width: 170px; height: 68px; position: relative; float: left; }
+.unit-box { width: 30px; height: 30px; position: relative; float: left; margin: 2px; }
+.unit-box img { margin: auto; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; }
+.war-troop-info {  position: relative; width: 160px; height: 96px; float: right; margin-right: 10px; }
+.war-troop-info img { position: relative; float: right; clear: right; }
+.war-unit-info-name, .war-unit-info-value { position: relative; float: left; top: 10px; margin-left: 11px; }
+
+.trained-units { position: absolute; width: 100%; height: 84px; bottom: 0px; }
+.war-troops-trained-units { position: relative; float: left; width: 272px; height: 65px; margin: 2px 0 0 12px;; }
+
+.war-available-unit-name{ color: #d4ae71; position: relative; float: left; font-size: 16px;  margin-left: 10px; line-height: 0px; margin-right: 10px; }
+.war-name { clear: right; }
+
+/* TOP */
+.top { position: relative; float: left; width: 100%; height: 65px; }
+
+.top-menu-bar { background-image: url("../img/top-interface/top-menu-bar.png"); position: relative; float: left; width: 100%; height: 28px; }
+.top-menu-name { background-image: url("../img/top-interface/top-menu-name01.png"); position: relative; width: 168px; height: 27px; margin: 0 auto; }
+.top-menu-center-box { position: relative; margin: 0 auto; width: 404px; }
+.top-menu-center { position: relative; width: 202px; height: 35px; float: left; top: -10px; z-index: -1; }
+.top-menu-center-l { background-image: url("../img/top-interface/top-menu-center-l.png"); }
+.top-menu-center-r { background-image: url("../img/top-interface/top-menu-center-r.png"); }
+.top-menu-center-down { background-image: url("../img/top-interface/top-menu-center-down.png"); position: relative; width: 152px; height: 35px; top: 24px; margin: 0 auto; }
+
+.top-menu-button { background-image: url("../img/top-interface/top-menu-button.png"); position: relative; float: left; width: 25px; height: 25px; margin-left: 10px; cursor: pointer; }
+.full-screen-button { background-image: url("../img/top-interface/full-screen-button.png"); position: relative; float: right; width: 25px; height: 25px; margin-right: 10px; cursor: pointer; top: 1px; }
+
+.top-menu-gradient-bar { position: relative; float: left; height: 26px; width: 50%; z-index: -1; background-image: linear-gradient(left , rgba(26,0,0,0.5) 18%, rgba(145,134,134,0.5) 70%); background-image: -o-linear-gradient(left , rgba(26,0,0,0.5) 18%, rgba(145,134,134,0.5) 70%); background-image: -moz-linear-gradient(left , rgba(26,0,0,0.5) 18%, rgba(145,134,134,0.5) 70%); background-image: -webkit-linear-gradient(left , rgba(26,0,0,0.5) 18%, rgba(145,134,134,0.5) 70%); background-image: -ms-linear-gradient(left , rgba(26,0,0,0.5) 18%, rgba(145,134,134,0.5) 70%); }
+.daynight { position: relative; float: left; margin: 0px 5px 0px 5px; top: 5px; }
+.effects { position: relative; float: left; margin: 0px 5px 0px 5px; top: 6px; }
+
+
+/* BUILD ORDER */
+
+.build-order { position: relative; float: left; top: 20px; clear: left; }
+.build-order-content { position: relative; float: left; clear: left; margin-bottom: 5px; }
+.build-order-box { background-image: url("../img/build-order/box.png"); width: 255px; height: 168px; position: relative; float: left; display: none; }
+.build-order-tab { width: 23px; height: 53px; position: relative; float: left; cursor: pointer; }
+
+.tab-build { background-image: url("../img/build-order/tab-build.png"); top: 10px; z-index: 2; }
+.tab-build-click { top: 20px; }
+.tab-research { background-image: url("../img/build-order/tab-research.png"); z-index: 1; }
+.tab-research-click { top: 20px; }
+.tab-training { background-image: url("../img/build-order/tab-training.png"); top: -10px; }
+.tab-training2 { top: 0px; }
+.tab-training-click { top: 20px; }
+
+.order-info { position: relative; width: 220px; top: 10px; left: 18px; text-align: center; }
+.name { font-size: 23px; color: #d4ae71; margin-right: 5px;  }
+.status { font-size: 10px; color: #d5d5d5; }
+.time { font-size: 10px; color: #d5d5d5; }
+.order-progress-bar {  background-image: url("../img/build-order/progress-bar.png"); width: 130px; height: 8px; margin: 0 auto; }
+.order-inner-progress-bar { position: relative; float: left; left: 14px; top: 3px; width: 103px; height: 2px; }
+.order-inner-progress-bar div { position: relative; background-color: green; width: 50%; height: 2px; }
+
+.order-content { position: relative; width: 220px; top: 15px; left: 18px; }
+.order-content img { position: relative; float: left; }
+.order-button { background-image: url("../img/build-order/button.png"); width: 116px; height: 27px; position: relative; float: right; margin-top: 10px; cursor: pointer; text-align: center; }
+.order-button span { font-size: 18px; color: #d4ae71; position: relative; top: 3px; }
+
+
+/* LIVE STOCK */
+
+.live-stock { position: relative; float: right; top: 80px; clear: right; }
+.live-stock-content { position: relative; float: right; clear: right; margin-bottom: 5px; }
+.live-stock-box { background-image: url("../img/live-stock/live-stock.png"); width: 350px; height: 250px; position: relative; float: right; }
+.live-stock-tab { top: 22px; width: 23px; position: relative; float: right; cursor: pointer; text-align: center; }
+.live-stock-tabs { position: relative; float: right; right: 5px; margin-top: 8px; }
+
+.livestock { background-image: url("../img/live-stock/bar.png"); width: 320px; height: 198px; position: relative; margin: 34px 0 0 15px; display: none; }
+.livestock th, .livestock td { width: 25%; text-align: center; font-size: 12px; color: white; height: 44px; position: relative; }
+.livestock td img { position: absolute; margin: auto; top: 0; left: 0; bottom: 0; right: 0;  }
+.livestock table, .camels table { width: 100%; }
+
+.camels { background-image: url("../img/live-stock/bar2.png"); width: 242px; height: 198px; position: relative; margin: 34px 0 0 93px; }
+.camels th, .camels td { width: 33%; text-align: center; font-size: 12px; color: white; height: 44px; position: relative; }
+.camels-button { background-image: url("../img/by-gold/by-gold-text.png"); width: 84px; height: 20px; position: absolute; left: -86px; text-align: center; color: white; cursor: pointer; }
+
+
+/* BOTTOM TOP */
+
+.bottom-top { width: 100%;/*  height: 113px; */ position: absolute; bottom: 115px; }
+
+.heroes { width: 132px; position: absolute; left: 0px; bottom: 0px; }
+.hero-frame { background-image: url("../img/hero-window/hero-box.png"); width: 132px; height: 70px; position: relative; float: left; clear: left; margin-top: 5px; }
+.hero-icon { background-image: url("../img/hero-window/hero-icon-1.png"); width: 46px; height: 65px; position: relative; float: left; }
+.hero-name-title { position: relative; float: left; width: 70px; text-align: center; top: 10px; left: 4px; }
+.hero-name { position: relative; color: #d4ae71; font-size: 14px; display: inline; }
+.hero-title { position: relative; color: #d4ae71; font-size: 10px; top: -8px; }
+.expirience { position: relative; float: left; left: 1px; }
+.expirience span { position: relative; float: left; color: white; font-size: 9px; }
+.exp-bar { background-image: url("../img/hero-window/exp-bar.png"); width: 71px; height: 8px; position: relative; float: left; clear: left; }
+.exp-inner-bar { position: relative; float: left; left: 14px; top: 3px; width: 45px; height: 2px; }
+.exp-inner-bar div { position: relative; background-color: green; width: 50%; height: 2px; }
+
+.slide-down { height: calc(100% - 28px); }
+
+.chat { position: absolute; right: 2px; top: auto!important; left: auto!important; bottom: -4px; background-color: rgba(26,0,0,0.7); min-width: 430px; max-width: 700px; width: 430px; /* min-height: 230px; */ max-height: 500px; height: 230px; }
+.chat-bar-up { background-image: url("../img/chat-window/chat-bar-up.png"); position: relative; width: 100%; height: 28px; z-index:1; }
+
+.slide-button { position: relative; float: left; width: 22px; height: 22px; top: 3px; }
+.slide-down-button { background-image: url("../img/chat-window/minimize.png"); }
+.slide-up-button { background-image: url("../img/chat-window/un-minimize.png"); }
+.resize-button { background-image: url("../img/chat-window/resize-button.png"); position: relative; float: left; margin-right: 10px;  width: 16px; height: 16px; top: 4px; }
+
+.chat-tab { position: relative; float: right; right: 20px; top: 3px; cursor: pointer; }
+.chat-tab-l { background-image: url("../img/chat-window/chat-tab-l.png"); position: relative; float: left; width: 17px; height: 23px; }
+.chat-tab-middle { background-image: url("../img/chat-window/chat-tab-middle.png"); position: relative; float: left; height: 23px; color: #d4ae71; line-height: 25px; font-size: 12px; }
+.chat-tab-r { background-image: url("../img/chat-window/chat-tab-r.png"); position: relative; float: left; width: 9px; height: 23px; }
+
+.chat-tab-b { background-image: url("../img/chat-window/chat-tab-b.png"); position: relative; float: left; width: 23px; height: 17px; }
+.chat-tab-middle-v { background-image: url("../img/chat-window/chat-tab-middle-v.png"); position: relative; float: left; width: 23px; color: #d4ae71; line-height: 10px; font-size: 12px; }
+.chat-tab-t { background-image: url("../img/chat-window/chat-tab-t.png"); position: relative; float: left; width: 23px; height: 9px; }
+
+.chat-tab-l-big { background-image: url("../img/chat-window/chat-tab-l.png"); position: relative; float: left; width: 17px; height: 23px; }
+.chat-tab-middle-big { background-image: url("../img/chat-window/chat-tab-middle.png"); position: relative; float: left; height: 23px; color: #d4ae71; line-height: 25px;  font-size: 12px; }
+.chat-tab-r-big { background-image: url("../img/chat-window/chat-tab-r.png"); position: relative; float: left; width: 9px; height: 23px; }
+
+.chat-slider-bar { position: relative; float: right; width: 13px; height: calc(100% - 50px); }
+.chat-slider-u { background-image: url("../img/chat-window/slider-bar-u.png"); width: 13px; height: 23px; float: left; clear: left; }
+.chat-slider-middle { background-image: url("../img/chat-window/slider-bar-middle.png"); width: 9px; height: calc(100% - 47px); float: left; clear: left; position: relative; left: 2px; }
+.chat-slider-d { background-image: url("../img/chat-window/slider-bar-d.png"); width: 13px; height: 23px; float: left; clear: left; }
+.chat-slider { background-image: url("../img/chat-window/slider.png"); width: 14px; height: 11px; position: relative; left: -5px; }
+
+.text-input { position: absolute; bottom: 0px; width: 100%; }
+.text-input-middle { background-image: url("../img/chat-window/text-input-middle.png"); height: 22px; width: calc(100% - 45px); position: relative; float: right; color: white; text-align: right; border: 0px; display: block; outline: 0; }
+.enter-button { background-image: url("../img/chat-window/enter.png"); width: 41px; height: 18px; position: absolute; left: 2px; top: 2px; cursor: pointer; }
+
+/* BOTTOM */
+
+.bottom { width: 100%;/*  height: 113px; */ position: absolute; bottom: 0px; display: table; }
+
+.left-section { position: relative; float: left; width: 132px; height: 116px; }
+.map-box { background-image: url("../img/map-box/map-box.png"); position: relative; float: left; width: 132px; height: 106px; top: 6px; }
+
+.middle-section { height: 113px; overflow: hidden; position: relative; }
+.right-section { background-image: url("../img/by-gold/frame.png"); position: relative; float: right; width: 133px; height: 106px; top: 5px; }
+.right-section img { position: relative; margin: 0 auto; display: block; top: 21px; }
+.ofdsaij { background-image: url("../img/by-gold/ofdsaij.png"); width: 83px; height: 4px; position: relative; margin: 0 auto; top: 11px; }
+.of2 { top: 26px; }
+.by-gold-text { background-image: url("../img/by-gold/by-gold-text.png"); width: 84px; height: 20px; position: relative; margin: 0 auto; top: 30px; }
+
+.bot-bar { position: relative; float: left; width: 100%; top: 6px; }
+.bot-bar-deco-l { background-image: url("../img/bottom-middle/bot-bar-deco-l.png"); width: 70px; height: 22px; float: left; }
+.bot-bar-deco-r { background-image: url("../img/bottom-middle/bot-bar-deco-r.png"); width: 70px; height: 22px; float: right; }
+.bot-bar-deco-middle { background-image: url("../img/bottom-middle/bot-bar-deco-middle.png"); height: 22px; }
+
+.friends-tab { background-image: url("../img/bottom-middle/friends-tab.png"); width: 50px; height: 23px; position: relative; float: left; top: 4px; cursor: pointer; }
+.alliance-tab { background-image: url("../img/bottom-middle/alliance-tab.png"); width: 50px; height: 23px; position: relative; float: left; top: 4px; cursor: pointer; left: -5px; }
+.build-tab { background-image: url("../img/bottom-middle/build-tab.png"); width: 50px; height: 23px; position: relative; float: left; top: 4px; cursor: pointer; }
+.inventory-tab { background-image: url("../img/bottom-middle/inventory-tab.png"); width: 50px; height: 23px; position: relative; float: left; top: 4px; cursor: pointer; right: -5px; }
+ 
+.bot-bar-deco-name { position: relative; margin:0 auto; top: -7px; display: table; height: 147px; width: auto; }
+.bot-bar-deco-name-left { background-image: url("../img/bottom-middle/bot-bar-deco-name-left.png"); width: 25px; height: 28px; float: left; }
+.bot-bar-deco-name-middle { background-image: url("../img/bottom-middle/bot-bar-deco-name-middle.png"); line-height: 28px; color: white; width: 105px; font-size: 15px; position: relative; float: left; text-align: center; }
+.bot-bar-deco-name-right { background-image: url("../img/bottom-middle/bot-bar-deco-name-right.png"); width: 25px; height: 28px; float: left; }
+
+.friends { background-image: url("../img/bottom-middle/friends-frame-bg.png"); }
+.buildings { background-image: url("../img/bottom-middle/friends-frame-bg.png"); display: none; }
+.img-frame { position: relative; margin: 0px 2px 0px 2px; top: -2px; display: inline; }
+.frame-bg { width: 100%; height: 74px; position: relative; top: 6px; overflow: hidden; white-space: nowrap; }
+
+.slider-bar { position: relative; float: left; width: 100%; top: 6px; }
+.slider-bar-l-big { background-image: url("../img/bottom-middle/slider-bar-l.png"); width: 23px; height: 13px; float: left; }
+.slider-bar-r-big { background-image: url("../img/bottom-middle/slider-bar-r.png"); width: 23px; height: 13px; float: right; }
+.slider-bar-middle-big { background-image: url("../img/bottom-middle/slider-bar-middle.png"); height: 9px; position: relative; overflow: hidden; top: 2px; }
+.slider-big { background-image: url("../img/bottom-middle/slider.png"); width: 11px; height: 14px; position: relative; float: right; }
+
+.slider-bar-l { background-image: url("../img/bottom-middle/slider-bar-l.png"); width: 23px; height: 13px; float: left; }
+.slider-bar-r { background-image: url("../img/bottom-middle/slider-bar-r.png"); width: 23px; height: 13px; float: right; }
+.slider-bar-middle { background-image: url("../img/bottom-middle/slider-bar-middle.png"); height: 9px; position: relative; overflow: hidden; top: 2px; }
+.slider { background-image: url("../img/bottom-middle/slider.png"); width: 11px; height: 14px; position: relative; float: right; }
+
+
+
+
+
+
+
+@media screen and (max-width: 1024px) , screen and (max-height: 768px) {
+
+.close-button { background-image: url("../img/dialog/commander/x-button.png"); background-size: 100%; position: absolute; float: left; left: 35px; top: 2px; width: 17px; height: 17px; cursor: pointer; }
+.move-button { margin-top: 10px!important; }
+.forge-button { margin-top: 15px!important; position: relative!important; float: left!important; margin-left: 3px!important; }
+
+.dialog-name { height: 20px; }
+.dialog-name span, .trade-station-name span { font-size: 15px!important; color: white; line-height: 23px; }
+
+.slider-bar-l { background-image: url("../img/bottom-middle/slider-bar-l.png"); background-size: 100%; width: 18px; height: 10px; float: left; }
+.slider-bar-r { background-image: url("../img/bottom-middle/slider-bar-r.png"); background-size: 100%; width: 18px; height: 10px; float: right; }
+.slider-bar-middle { background-image: url("../img/bottom-middle/slider-bar-middle.png"); background-position-y: -1px; height: 6px; position: relative; overflow: hidden; top: 2px; }
+.slider { background-image: url("../img/bottom-middle/slider.png"); background-size: 100%; width: 9px; height: 10px; position: relative; float: right; }
+
+
+/* Trade */
+
+.trade-station { background-image: url("../img/dialog/trade-station/trade-station-box1.png"); background-size: 100%; width: 543px; height: 356px;  }
+
+.trader-info { position: relative; float: left; display: block; margin-top: 14px; }
+
+.trade-station-name { width: 254px; height: 19px; margin-top: 2px; }
+
+.trader { width: 77px; height: 118px; margin-left: 10px; }
+.trader img { top: 12px; width: 50px; }
+.trader-name { top: 6px; font-size: 12px; }
+.level-name { position: relative; top: 22px; color: white; font-size: 12px; margin-right: 5px }
+.level-value { position: relative; top: 22px; color: white; font-size: 12px;  }
+
+.trade-goods-own { width: 161px; height: 82px; }
+.trade-goods-inventory { width: 241px; height: 81px; margin: 7px 0 0 11px; }
+
+.load-unload { margin-top: -13px; margin-left: 98px; }
+.unload { background-size: 100%; margin-right: 7px; width: 28px; height: 14px; }
+.load { background-size: 100%; width: 28px; height: 14px; margin-right: 12px; }
+
+.gold-name { margin-top: -32px; width: 78px; }
+.gold-name span { font-size: 12px; }
+.gold-amount { margin-top: -16px; text-align: center; left: 172px; width: 75px; }
+.gold-amount span { font-size: 14px; }
+
+.load-text { position: absolute; top: 227px; left: 12px; width: 80px; }
+.load-text span { font-size: 11px; }
+
+.available-traders { height: 295px; width: 179px; top: 14px; }
+.available-traders-name { font-size: 15px; line-height: 25px; }
+
+.available-traders-box { position: relative;margin: 0 auto; width: 178px; height: 57px; background-color: rgba(0,0,0,0.5); margin-bottom: 10px; }
+.available-traders-box img { margin: 4px 0px 5px 5px; width: 49px; }
+
+.available-trader-info { position: relative; float: left; width: 123px; height: 55px; }
+.trader-name-b { position: relative; color: white; font-size: 20px; top: 6px; }
+.level-name-b { font-size: 13px; margin-right: 5px; top: 6px; }
+.level-value-b { font-size: 13px; top: 6px; }
+
+.trade-building-info {  width: 105px; height: 260px; margin: 0 0 0 2px;; }
+.training-building-info { width: 114px; height: 200px; top: -60px; }
+.tavern-building-info, .war-building-info { width: 100px; height: 200px; top: 0px; }
+.port-building-info {  width: 100px; height: 200px; top: 12px; }
+
+.dialog-building-img { margin-top: 30px; width: 67px; }
+.upgrade-building { background-size: 100%; margin: 0 auto; width: 95px; height: 23px; margin-top: 30px; line-height: 23px; font-size: 14px; }
+
+
+/* Tavern */
+
+.tavern { background-image: url("../img/dialog/tavern/tavern-box.png"); background-size: 100%; width: 437px; height: 446px; }
+
+.tavern-tabs { position: relative; float: right; right: 85px; top: 4px; }
+.bars { background-size: 100%; position: absolute;  width: 316px; height: 357px; }
+
+.tavern-info, .war-commander-info { width: 316px; height: 357px; margin-top: 7px; margin-left: 18px; }
+.tavern-info table { font-size: 12px; }
+.tavern-info td { width: 33%; position: relative; top: 1px; }
+.tavern-hero-img {background-size: 100%; position: relative; width: 37px; height: 49px; }
+.tavern-hero-table-name { position: relative; margin: 0 auto; top: -10px; }
+.tavern-hero-name { position: absolute; top: 50px; right: 85px; }
+.statistics { position: relative; margin: 0 auto; margin-right: 5px; }
+.employ-button { background-size: 100%; width: 95px; height: 23px; margin-top: 10px; left: 129px; line-height: 23px; font-size: 14px; }
+
+.tr-click-bg { background: rgba(155,36,36,0.3)!important; }
+
+tr:nth-child(even) {background: transparent; }
+tr:nth-child(odd) {background: rgba(0,0,0,0.2);}
+
+.chat-tab { top: 4px; }
+.chat-tab-l { background-size: 100%; width: 11px; height: 15px; }
+.chat-tab-middle { background-image: url("../img/chat-window/chat-tab-middle-s.png"); height: 15px; line-height: 19px; font-size: 11px; }
+.chat-tab-r { background-size: 100%; width: 7px; height: 15px; }
+
+
+/* Training */
+
+.training { background-size: 100%; width: 473px; height: 405px;  }
+.trainer-statistic { width: 166px; height: 54px; margin: 21px 0px 0px 30px; }
+.training-reserve { margin: 31px 3px 3px 3px; width: 32px; }
+.trainer-avatar { width: 37px; }
+
+.traniers-name { font-size: 12px;  }
+.traniers-level { font-size: 12px; }
+.traniers-level-value { font-size: 12px;}
+.tranier-stat-name span { font-size: 11px; line-height: 12px; }
+.tranier-stat-value span { font-size: 11px; line-height: 12px; }
+
+.price-name { color: #d4ae71!important; }
+.br-span { margin-top: 12px; }
+
+.training-troop { width: 332px; height: 240px; margin: 10px 0px 0px 27px; }
+.selected-troop { width: 166px; height: 240px; }
+.selected-troop img { margin: 10px 0 0 15px; width: 138px; }
+
+.select-troops { position: relative; float: right; width: 164px; height: 240px; }
+.select-troops img { width: 51px; }
+
+.available-unit-info { background-size: 100%; width: 164px; height: 66px; left: -1px; }
+.available-unit-name, .war-level-name, .war-level-value  { font-size: 13px;  margin-left: 10px; line-height: 25px; margin-right: 4px; }
+
+.unit-info-name, .unit-info-value { top: 7px; margin-right: 6px; }
+.unit-info-name span, .unit-info-value span, .war-unit-info-name span, .war-unit-info-value span { font-size: 10px; }
+
+.troop-price {  width: 166px; height: 25px; margin: 4px 0px 0px 0px; }
+.troop-price span { font-size: 10px; line-height: 20px; }
+.troop-price .value { margin: 0 5px 0 0; }
+
+.ver-box { top: -14px; }
+.ver-box span { padding: 1px; margin: 1px; font-size: 11px; line-height: 10px; }
+
+.slider-amount { position: relative; width: calc(100% - 18px); left: 8px; display: block; margin-top: 1px; float: left; }
+.troop-slider { width: 150px; margin-top: 5px; }
+.min-max { font-size: 12px; line-height: 19px; margin: 0px 5px 0px 5px; }
+.troop-amount { width: 26px; font-size: 10px; line-height: 19px; }
+.amount-name { font-size: 12px; line-height: 19px; margin-right: 13px; }
+.troop-bar-full { background-image: url("../img/dialog/training/bar-full.png"); width: calc(50% - 7px); height: 6px; top: 4px; left: 4px; }
+
+.train-button-box { background-size: 100%; width: 95px; height: 23px; bottom: 5px; line-height: 23px; left: 148px; font-size: 14px; }
+
+.dialog-building-img-2 { margin-top: 40px; width: 67px; }
+
+
+/* Commander */
+
+.commander { background-size: 100%; position: absolute; width: 400px; height: 528px; }
+.commander-inventory { margin: 0px 0px 0px 23px; width: 170px; height: 251px; }
+.commander-inventory img, .commander-troops img, .trade-point-inventory img, .trade-goods-own img, .trade-goods-inventory img, .trader-inventory img { margin: 4px; width: 34px; }
+
+.commander-troops { margin: 19px 0px 0px 21px; width: 210px; height: 87px;  }
+
+.attach-agent { margin: 17px 0px 0px 64px; width: 87px; height: 85px; }
+.attach-agent img, .sale-trade-good img, .trade-point-avatar img { width: 37px; }
+
+.commander-info { width: 161px; height: 82px; margin: 20px 10px 0px 26px; }
+.commander-img { position: relative; margin-left: 66px; margin-top: 77px; }
+
+.commander-expirience-name, .commander-level-name, .commander-level-value, .commander-current-expirience, .commander-max-expirience { font-size: 12px; line-height: 18px; }
+
+.commander-name { margin: 16px 0 0 11px; width: 177px; height: 50px; }
+.commander-name span { font-size: 20px; }
+
+.commander-equipment { margin: -30px 0 0 17px; width: 175px; height: 263px; }
+.equipment-holder { top: 0px; left: 8px; height: 90%; }
+.equip-img { height: 100%; }
+
+.commander-exp-bar-box { width: 175px; height: 20px; margin: 1px 0 0 17px; }
+.commander-bar { background-size: 100%; width: 175px; height: 9px; }
+.commander-bar-full { background-size: 100%; width: calc(50% - 7px); height: 3px; top: 3px; left: 3px; }
+
+.equipment-box-b { position: absolute; width: 37px; height: 37px; }
+.equipment-box-s { position: absolute; width: 22px; height: 22px; }
+.head { top: 1px; left: 66px; }
+.back { top: 33px; left: 122px; }
+.l-hand { top: 108px; left: 122px; }
+.r-hand { top: 84px; left: 7px; }
+.torso { top: 66px; left: 66px; }
+.legs { top: 138px; left: 66px; }
+.boots { top: 199px; left: 66px; }
+.neck { top: 41px; left: 73px; }
+.l-ring { top: 150px; left: 129px; }
+.r-ring { top: 127px; left: 17px; }
+
+
+.commander-statistics-name { position: relative; color: #d4ae71; font-size: 18px; float: right; }
+
+
+/* Trader */
+
+.trader-screen { background-size: 100%; position: absolute; width: 308px; height: 393px;  }
+.trader-inventory { margin: 0px 0px 0px 23px; width: 170px; height: 166px; }
+.trader-inventory-info { width: 165px; height: 57px; margin: 0 0 0 30px; }
+.trader-inventory-info span { color: white; font-size: 11px; }
+
+.trader-img { position: relative; float: left; margin: 16px 0px 0px 10px; width: 86px; height: 84px; }
+.trader-bar-box { position: relative; float: left; margin: 8px 0px 0px 11px; width: 90px; height: 12px; }
+.trader-bar { background-size: 100%; width: 90px; height: 9px; }
+.trader-bar-full { background-size: 100%; width: calc(50% - 7px); height: 4px; top: 3px; left: 3px; }
+
+.weight-money { margin: 18px 0px 0px 11px; width: 90px; height: 60px; font-size: 12px; }
+
+
+/* Agent */
+
+.agent { background-size: 100%; position: absolute; width: 308px; height: 393px;  }
+.agent .trader-inventory {  margin: 0px 0px 0px 23px; width: 161px; height: 113px; }
+.agent .trader-inventory-info { width: 155px; height: 137px; margin: -4px 0 0 32px;  }
+.agent .trader-inventory-info span { font-size: 10px; width: 75px; }
+.trader-inventory-info span { color: white; font-size: 12px; }
+
+.agent .trader-img { margin: -1px 0px 0px -6px; width: 114px; height: 114px; }
+.agent .trader-bar-box { margin: 0px 0px 0px 1px; width: 120px; height: 12px; }
+
+
+/* Science Tent */
+
+.science-tent { background-size: 100%; width: 375px; height: 393px; }
+.science-tabs { right: 97px; top: 8px; }
+
+.science-tent-content { margin: 14px 8px 0 26px; width: 234px; height: 314px; }
+.science-tent-content-box { width: 234px; height: 78px; }
+.science-tent-content-box img { margin-top: 14px; width: 51px; }
+.st-info-name, .st-info-value { margin: 15px 0 0 15px; }
+.st-info-name span, .st-info-value span { font-size: 10px; color: white; }
+
+
+/* Main Tent */
+
+.main-tent { background-size: 100%; width: 413px; height: 393px; }
+.main-tent-content { margin: 19px 11px 0 25px; width: 269px; height: 313px; }
+.main-tent-content span {  font-size: 12px; color: #ffdc9f; width: 100px; }
+
+/* Port */
+
+.port { background-size: 100%; width: 308px; height: 287px; }
+.port-content { margin: 25px 6px 0 17px; width: 176px; height: 214px; }
+.port-content span { position: relative; font-size: 16px; color: #d4ae71; margin-top: 1.5px; display: block; }
+.port-content-info { font-size: 10px!important; color: white!important; margin-top: 4px!important; display: inline!important; }
+.fishing-boat-button { background-size: 100%; width: 95px; height: 23px; line-height: 23px; margin-top: 5px; font-size: 14px; }
+.fishing-boat-button-s { font-size: 11px!important; }
+.active-boats { position: relative; margin: 0 auto; width: 120px; height: 52px; margin-top: 2px; }
+.active-boats div { position: relative; float: left; width: 20px; height: 20px; margin: 2px; }
+.active-boats img { position: relative; margin: 1px; width: 18px; }
+
+
+/* Warehouse */
+
+.warehouse { background-size: 100%; width: 361px; height: 433px; }
+.resource-overview { margin: 24px 8px 0 22px; width: 223px; height: 140px; }
+.ro-name { width: 100%; height: 16px; text-align: center; }
+.ro-name span { line-height: 16px!important; font-size: 15px; }
+
+.warehouse table { width: 223px; height: 125px; }
+.warehouse td { width: 30%; font-size: 12px; }
+
+.storage-capacity { margin: -26px 0 0 21px; width: 225px; height: 217px; }
+.total-capacity-name { margin: 6px 0 0 71px; font-size: 14px; }
+.storage-exp-bar-box { position: relative; margin: 0 auto; width: 230px; height: 15px; }
+.storage-sub-exp-bar-box { position: relative; float: left; width: 120px; height: 11px; }
+
+.max-capacity { margin-left: 28px; font-size: 12px; }
+.min-capacity { margin-right: 28px; font-size: 12px; }
+
+.single-capacity { position: relative; margin: 0 auto; clear: left; width: 195px; height: 17px; margin-top: 4px; }
+.single-capacity img { position: relative; float: left; margin-left: 10px; margin-top: -5px; width: 17px; }
+.single-max-min { position: relative; float: left; font-size: 10px; margin: -2px 3px 0 3px; color: white; }
+.commander-bar-2 { background-image: url("../img/dialog/commander/exp-bar-2.png"); position: absolute; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 120px; height: 12px; }
+.commander-bar-full-2 { background-image: url("../img/dialog/commander/bar-full-2.png"); width: calc(50% - 7px); height: 6px; position: relative; float: left; top: 4px; left: 4px; }
+
+
+/* Fdsw */
+
+.fdsw { background-size: 100%; width: 293px; height: 240px; }
+.fdsw-content { margin: 35px 7px 0 20px; width: 157px; height: 160px; }
+.fdsw-content span { font-size: 14px; }
+
+
+/* Forge */
+
+.forge { background-size: 100%; width: 385px; height: 263px; }
+.forge-content { margin: 26px 5px 0 19px; width: 251px; height: 193px; }
+
+.forge-content-box { height: 53px; margin: 5px 0 5px 0; }
+.forge-content-box select { width: 89px; float: left; margin: 20px 0 0 2px; background: url("../img/dialog/commander/drop-down-button.png") no-repeat; background-position: 71px -1px; font-size: 10px; background-size: 17px;  text-indent: 0.01px;  }
+.forge-content-box option { left: 1px; }
+.forge-frame { background-size: 100%; width: 53px; height: 53px; margin-left: 5px; }
+.forge-content-box img { height: 49px; }
+.forge-names { width: 86px; height: 10px; top: 1px; left: 104px; }
+.forge-names span { font-size: 10px; }
+
+
+/* Garrison */
+
+.garrison { background-size: 100%; width: 354px; height: 263px; }
+.garrison-content { margin: 26px 6px 0 22px; width: 218px; height: 194px; }
+
+.garrison-content-box { width: 207px; height: 62px; }
+.garrison-content-box span { font-size: 12px; margin: 5px 0 6px 7px; }
+
+.garrison-inventory { width: 207px; height: 35px; }
+.garrison-inventory img { margin: -2px 0 0 6px; width: 34px; }
+
+
+/* Arabian Medicine Tent */
+
+.arabian-medicine-tent { background-size: 100%; width: 361px; height: 346px; }
+.medicine-overview { margin: 22px 6px 0 22px; width: 224px; height: 191px; }
+.medicine-overview table { width: 100%; }
+.price-status-box { margin: 11px 10px 0 22px; width: 224px; height: 61px; }
+.price-status { width: 110px; margin: 1px; height: 59px; }
+.price-status span { font-size: 12px; color: white; }
+
+.one-third { font-size: 12px; }
+.two-thirds { font-size: 12px;}
+
+
+
+/* Market Tent */
+
+.market-tent { background-size: 100%; width: 417px; height: 287px; }
+.trade-boxes { margin: 25px 0 0 12px; width: 295px; height: 141px;  }
+
+.market-tent-name-1 { margin: -4px 0 0 6px; width: 130px; height: 14px; }
+.market-tent-name-2 { margin: -4px 6px 0 0; width: 130px; height: 14px; }
+.market-tent-name-1 span, .market-tent-name-2 span { font-size: 14px; }
+
+.server-items { margin: 18px 0 0 14px; width: 118px; height: 98px; }
+.player-items { margin: 18px 14px 0 0; width: 118px; height: 98px; }
+
+.item-box { width: 36px; height: 46px; }
+.item-box img { width: 35px; height: 35px; }
+.item-box input { width: 35px; height: 11px; margin: 2px 0 0 1px; font-size: 9px; }
+
+.ietm-box-2 { left: 41px; }
+.ietm-box-3 { left: 81px; }
+.ietm-box-4 { left: 22px; bottom: 0px; }
+.ietm-box-5 { left: 63px; bottom: 0px; }
+.ietm-box-6 { left: 13px; top: 3px }
+.ietm-box-7 { right: 14px; top: 3px  }
+
+.current-trade { margin-left: 12px; width: 300px; height: 77px; top: -31px; }
+.market-tent-slider-box { bottom: 0px; }
+.market-tent-slider { width: 235px; height: 12px; margin-top: 6px; }
+
+
+
+/* Trade Point */
+
+.trade-point { background-size: 100%; position: absolute; width: 436px; height: 311px;  }
+
+.load-money { position: relative; float: left; margin: 27px 0px 0px 23px; width: 290px; height: 17px; }
+.load-money span { font-size: 12px; line-height: 9px; margin: 3px; }
+
+.trade-point-avatar { position: absolute; top: 48px; right: 21px; width: 86px; height: 86px;  }
+
+.merchant, .trade-p { margin: 4px 0px 0px 24px; width: 288px; height: 107px; }
+.merchant input, .trade-p input { width: 37px; height: 12px; font-size: 12px; margin: -14px 0px 0px 19px; }
+.trade-p input { top: 5px; }
+.sale-trade-good { margin: 4px 0px 0px 7px; width: 60px; height: 60px;  }
+.good2 { margin: 14px 0px 0px 13px; }
+.trade-point-slider-bar { width: 73px; height: 13px; margin: 6px 0px 0px 3px; }
+
+.trade-point-inventory { position: relative; float: left; width: 205px; height: 82px;  margin-left: 10px; }
+
+.sell-button { background-size: 100%; width: 95px; height: 23px; line-height: 23px; font-size: 14px; }
+.sell-all { margin-top: -1px; margin-left: 8px; }
+.sell { margin-top: -22px; margin-left: 185px; }
+.buy { margin-top: -19px; margin-left: 134px; }
+
+
+/* War */
+
+.war-commander { background-size: 100%; position: absolute; width: 437px; height: 446px; }
+.war-commander-info tr, .war-commander-info td  { width: 100%; height: 96px; display: block; }
+.war-commander-info table { position: relative; float: left; clear: left; width: 100%; color: white; text-align: center; }
+
+
+.war-troops { background-size: 100%; width: 128px; height: 51px; position: relative; float: left; }
+.unit-box { width: 24px; height: 24px; position: relative; float: left; margin: 0.8px; }
+.unit-box img { margin: auto; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; width: 22px; }
+.war-troop-info { width: 132px; height: 92px; margin-right: 10px; }
+.war-troop-info img { width: 37px; }
+.war-unit-info-name, .war-unit-info-value { position: relative; float: right; top: 10px; margin-right: 11px; }
+
+.trained-units { position: absolute; width: 100%; height: 72px; bottom: 0px; }
+.war-troops-trained-units { position: relative; float: left; width: 204px; height: 51px; margin: 10px 0 0 6px;; }
+
+.war-available-unit-name{  font-size: 14px;  margin-left: 10px; line-height: 15px; margin-right: 10px; }
+.war-name { clear: right; }
+}

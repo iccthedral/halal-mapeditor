@@ -1,0 +1,11 @@
+{
+    "name": "Halal - Map editor",
+    "version": "0.0.1",
+    "dependencies": {
+        "requirejs": null,
+        "jquery": null,
+        "jquery-ui": null,
+        "handlebars": null,
+        "halal": "git@github.com:iccthedral/halal.git"
+    }
+}
