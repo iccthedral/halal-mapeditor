@@ -82,6 +82,13 @@ module.exports = (grunt) ->
         x = Math.sin(generating_seed++) * 10000;
         return x - Math.floor(x)
 
+    saveSprites = (sprites) ->
+        sprites = sprites.map(
+            (x) ->
+                return "sprites/#{x}"
+        )
+        fs.writeFileSync(config.sprite_list, sprites.join().replace(/,/g,"\n"))
+
     #load all tiles
     all_tiles = do getAllTiles = () ->
         out = fs.readFileSync(config.tiles)
@@ -118,17 +125,16 @@ module.exports = (grunt) ->
         console.log "Last seed used: #{seed}".green
         return seed
 
-    saveSprites = (sprites) ->
-        out = out.map(
-            (x) ->
-                return "sprites/#{x}"
-        )
-        fs.writeFileSync(config.sprite_list, out.join().replace(/,/g,"\n"))
+    saveSprites(all_sprites)
 
     io = require("socket.io").listen(8080, {log: true})
     io.sockets.on "connection", (sck) ->
         console.log "Connection via socket.io established".green
         socket = sck
+        
+        all_sprites = getAllSprites()
+        saveSprites(all_sprites)
+        all_tiles = getAllTiles()
 
         socket.emit "LOAD_SPRITES", 
             files: JSON.stringify(all_sprites)

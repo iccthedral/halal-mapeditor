@@ -23,8 +23,7 @@
     Hal.asm.loadSpritesFromFileList("assets/sprites.list");
     return Hal.asm.on("SPRITES_LOADED", function() {
       return require(["MapEditor"], function(MapEditor) {
-        var isomap,
-          _this = this;
+        var isomap;
         llogi("MapEditor loaded");
         isomap = new IsometricMap({
           name: "Amjad",
@@ -37,15 +36,22 @@
           draw_quadspace: false,
           draw_stat: true
         });
+        isomap.pause();
         Hal.addScene(isomap);
-        return Hal.Ajax.get("assets/map/0_0", function(map) {
-          var arr;
-          arr = new Array();
-          map.split(",").forEach(function(t) {
-            return arr.push(+t);
-          });
-          return isomap.on("MAP_TILES_INITIALIZED", function() {
+        isomap.pause();
+        return isomap.on("MAP_TILES_INITIALIZED", function() {
+          var center, name,
+            _this = this;
+          center = this.worldCenterTile();
+          name = center.row + "_" + center.col;
+          return Hal.Ajax.get("assets/map/" + name, function(map) {
+            var arr;
+            arr = new Array();
+            map.split(",").forEach(function(t) {
+              return arr.push(+t);
+            });
             isomap.loadBitmapMap(arr);
+            isomap.resume();
             Hal.fadeInViewport(1000);
             return Hal.debug(true);
           });

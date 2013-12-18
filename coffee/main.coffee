@@ -8,7 +8,6 @@ requirejs.config
         "jquery-ui": "../vendor/jquery-ui/ui/minified/jquery-ui.min"
         "handlebars": "../vendor/handlebars/handlebars.min"
         "halal": "../vendor/halal/build/halal"
-
     shim:
         "jquery-ui":
             exports: "$"
@@ -18,7 +17,6 @@ require ["halal", "IsometricMap"], (Hal, IsometricMap) ->
     llog.setLevel "DEBUG"
     llogi "Halal loaded"
     Hal.asm.loadSpritesFromFileList("assets/sprites.list")
-
     Hal.asm.on "SPRITES_LOADED", () ->
         require ["MapEditor"], (MapEditor) ->  
             llogi "MapEditor loaded"      
@@ -32,13 +30,19 @@ require ["halal", "IsometricMap"], (Hal, IsometricMap) ->
                 draw_camera_center: true
                 draw_quadspace: false
                 draw_stat: true
+            isomap.pause()
             Hal.addScene(isomap)
-            Hal.Ajax.get "assets/map/0_0", (map) =>
-                arr = new Array()
-                map.split(",").forEach (t) ->
-                    arr.push(+t)
-                isomap.on "MAP_TILES_INITIALIZED", () ->
-                    isomap.loadBitmapMap(arr)
-                    Hal.fadeInViewport(1000)
-                    Hal.debug(true)
-        
+            isomap.pause()
+            isomap.on "MAP_TILES_INITIALIZED", () ->
+                    center = @worldCenterTile()
+                    name = center.row + "_" + center.col
+                    Hal.Ajax.get "assets/map/#{name}", (map) =>
+                        arr = new Array()
+                        map.split(",").forEach (t) -> arr.push(+t)
+                        isomap.loadBitmapMap(arr)
+                        isomap.resume()
+                        Hal.fadeInViewport(1000)
+                        Hal.debug(true)
+
+
+

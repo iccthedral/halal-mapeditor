@@ -136,6 +136,13 @@ define ["halal"], (Hal) ->
                     @tile_under_mouse = t
                     if @tile_under_mouse?
                         @tile_under_mouse.drawableOnState(Hal.DrawableStates.Fill)
+            else if t isnt @tile_under_mouse
+                if @tile_under_mouse
+                    @tile_under_mouse.drawableOffState(Hal.DrawableStates.Stroke)
+                @tile_under_mouse = t
+                if @tile_under_mouse?
+                    @tile_under_mouse.attr("stroke_color", green)
+                    @tile_under_mouse.drawableOnState(Hal.DrawableStates.Stroke)
 
     IsometricMap::destroy = () ->
         super()
