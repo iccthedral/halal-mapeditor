@@ -44,6 +44,7 @@ define ["halal"], (Hal) ->
             Hal.trigger "MAP_LOADED", coords
 
         @supported_modes["map-save"] = () =>
+
             save = @saveBitmapMap()
             start = @worldCenterTile()
             coords = [start.row, start.col]
@@ -63,10 +64,6 @@ define ["halal"], (Hal) ->
 
         @current_mode       = "mode-default"
         @current_mode_clb   = @supported_modes[@current_mode]
-
-    IsometricMap::parseMeta = (meta) ->
-        meta.max_layers = 5
-        super(meta)
 
     IsometricMap::initListeners = () ->
         super()
@@ -100,19 +97,7 @@ define ["halal"], (Hal) ->
         Hal.on "LEFT_CLICK", () =>
             return if @paused
             @current_mode_clb.call(@)
-                # if not @clicked_layer.tweener.animating 
-                #     @clicked_layer.tween
-                #         attr: "position[1]"
-                #         from: @clicked_layer.position[1]
-                #         to: @clicked_layer.position[1] - 10
-                #         duration: 300
-                #     .done () ->
-                #         @tween
-                #             attr: "position[1]"
-                #             from: @position[1]
-                #             to: @position[1] + 10
-                #             duration: 300
-        
+
         @show_tilelayer_listener =
         Hal.on "EXIT_FRAME", (delta) =>
             t = @getTileAt(@world_pos)
@@ -136,7 +121,26 @@ define ["halal"], (Hal) ->
                     @tile_under_mouse = t
                     if @tile_under_mouse?
                         @tile_under_mouse.drawableOnState(Hal.DrawableStates.Fill)
-
+            
+        @on "OVER_NEW_TILE", (newtile) ->
+            if @tile_under_mouse?
+                @tile_under_mouse.attr("stroke_color", "white")
+                @tile_under_mouse.attr("stroke_width", 0.5)
+            newtile.attr("stroke_color", "red")
+            newtile.attr("stroke_width", 2)
+            if not newtile.tweener.isAnimating()
+                newtile.tween
+                    attr: "position[1]"
+                    from: newtile.position[1]
+                    to: newtile.position[1] - 10
+                    duration: 300
+                .done () ->
+                    @tween
+                        attr: "position[1]"
+                        from: @position[1]
+                        to: @position[1] + 10
+                        duration: 300
+        
     IsometricMap::destroy = () ->
         super()
         Hal.removeTrigger "EDITOR_MODE_CHANGED", @editor_mode_listener

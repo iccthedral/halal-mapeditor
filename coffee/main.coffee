@@ -31,6 +31,7 @@ require ["halal", "IsometricMap"], (Hal, IsometricMap) ->
                 draw_quadspace: false
                 draw_stat: true
                 mask: Hal.asm.getSprite("tilemask_128x64")
+                max_layers: 6
                 
             isomap.pause()
             Hal.addScene(isomap)

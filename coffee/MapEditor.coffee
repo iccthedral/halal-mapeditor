@@ -20,6 +20,9 @@ define ["jquery-ui", "handlebars", "halal"],
     socket = io.connect('http://localhost:8080')
     socket.emit "LOAD_MAPEDITOR_ASSETS"
 
+    socket.on "TILE_ADDED", (tile) ->
+        Hal.trigger "TILE_MNGR_NEW_TILE", tile
+        
     socket.on "MAP_SECTION_SAVED", (start) ->
         console.debug "Map section #{start} successfully saved"
 
