@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["isometricscene"], function(IsometricScene) {
+  define(["halal"], function(Hal) {
     var IsometricMap;
     IsometricMap = (function(_super) {
       __extends(IsometricMap, _super);
@@ -14,7 +14,7 @@
 
       return IsometricMap;
 
-    })(IsometricScene);
+    })(Hal.IsometricScene);
     IsometricMap.prototype.init = function() {
       var _this = this;
       IsometricMap.__super__.init.call(this);
@@ -35,7 +35,7 @@
       };
       this.supported_modes["map-load"] = function() {
         var coords, save, start;
-        start = _this.getTile(0, 0);
+        start = _this.worldCenterTile();
         coords = [start.row, start.col];
         save = _this.saved_sections[start.row + "_" + start.col];
         if (save == null) {
@@ -48,7 +48,7 @@
       this.supported_modes["map-save"] = function() {
         var coords, save, start;
         save = _this.saveBitmapMap();
-        start = _this.getTile(0, 0);
+        start = _this.worldCenterTile();
         coords = [start.row, start.col];
         _this.saved_sections[start.row + "_" + start.col] = save;
         return Hal.trigger("MAP_SAVED", save, coords);

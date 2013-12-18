@@ -30,6 +30,8 @@ require ["halal", "IsometricMap"], (Hal, IsometricMap) ->
                 draw_camera_center: true
                 draw_quadspace: false
                 draw_stat: true
+                mask: Hal.asm.getSprite("tilemask_128x64")
+                
             isomap.pause()
             Hal.addScene(isomap)
             isomap.pause()

@@ -91,6 +91,7 @@ module.exports = (grunt) ->
 
     #load all tiles
     all_tiles = do getAllTiles = () ->
+        generating_seed = default_seed = 0xABCDEF
         out = fs.readFileSync(config.tiles)
         out = JSON.parse(out)
         for key, tile of out
@@ -131,7 +132,7 @@ module.exports = (grunt) ->
     io.sockets.on "connection", (sck) ->
         console.log "Connection via socket.io established".green
         socket = sck
-        
+
         all_sprites = getAllSprites()
         saveSprites(all_sprites)
         all_tiles = getAllTiles()

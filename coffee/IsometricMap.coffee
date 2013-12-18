@@ -34,7 +34,7 @@ define ["halal"], (Hal) ->
             @clicked_layer = null
 
         @supported_modes["map-load"] = () =>
-            start = @getTile(0, 0)
+            start = @worldCenterTile()
             coords = [start.row, start.col]
             save = @saved_sections[start.row+"_"+start.col]
             if not save?
@@ -45,7 +45,7 @@ define ["halal"], (Hal) ->
 
         @supported_modes["map-save"] = () =>
             save = @saveBitmapMap()
-            start = @getTile(0, 0)
+            start = @worldCenterTile()
             coords = [start.row, start.col]
             @saved_sections[start.row+"_"+start.col] = save
             Hal.trigger "MAP_SAVED", save, coords
@@ -136,13 +136,6 @@ define ["halal"], (Hal) ->
                     @tile_under_mouse = t
                     if @tile_under_mouse?
                         @tile_under_mouse.drawableOnState(Hal.DrawableStates.Fill)
-            else if t isnt @tile_under_mouse
-                if @tile_under_mouse
-                    @tile_under_mouse.drawableOffState(Hal.DrawableStates.Stroke)
-                @tile_under_mouse = t
-                if @tile_under_mouse?
-                    @tile_under_mouse.attr("stroke_color", green)
-                    @tile_under_mouse.drawableOnState(Hal.DrawableStates.Stroke)
 
     IsometricMap::destroy = () ->
         super()
