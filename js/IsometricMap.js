@@ -15,9 +15,9 @@
       return IsometricMap;
 
     })(Hal.IsometricScene);
-    IsometricMap.prototype.init = function() {
+    IsometricMap.prototype.init = function(meta) {
       var _this = this;
-      IsometricMap.__super__.init.call(this);
+      IsometricMap.__super__.init.call(this, meta);
       /* @SUPPORTED_EDITOR_MODES*/
 
       this.supported_modes = {};
@@ -64,10 +64,6 @@
       this.current_mode = "mode-default";
       return this.current_mode_clb = this.supported_modes[this.current_mode];
     };
-    IsometricMap.prototype.parseMeta = function(meta) {
-      meta.max_layers = 5;
-      return IsometricMap.__super__.parseMeta.call(this, meta);
-    };
     IsometricMap.prototype.initListeners = function() {
       var _this = this;
       IsometricMap.__super__.initListeners.call(this);
@@ -106,7 +102,7 @@
         }
         return _this.current_mode_clb.call(_this);
       });
-      return this.show_tilelayer_listener = Hal.on("EXIT_FRAME", function(delta) {
+      this.show_tilelayer_listener = Hal.on("EXIT_FRAME", function(delta) {
         var ctx, t;
         t = _this.getTileAt(_this.world_pos);
         if (_this.current_mode === "mode-place") {
@@ -127,6 +123,29 @@
               return _this.tile_under_mouse.drawableOnState(Hal.DrawableStates.Fill);
             }
           }
+        }
+      });
+      return this.on("OVER_NEW_TILE", function(newtile) {
+        if (this.tile_under_mouse != null) {
+          this.tile_under_mouse.attr("stroke_color", "white");
+          this.tile_under_mouse.attr("stroke_width", 0.5);
+        }
+        newtile.attr("stroke_color", "red");
+        newtile.attr("stroke_width", 2);
+        if (!newtile.tweener.isAnimating()) {
+          return newtile.tween({
+            attr: "position[1]",
+            from: newtile.position[1],
+            to: newtile.position[1] - 10,
+            duration: 300
+          }).done(function() {
+            return this.tween({
+              attr: "position[1]",
+              from: this.position[1],
+              to: this.position[1] + 10,
+              duration: 300
+            });
+          });
         }
       });
     };

@@ -2,23 +2,22 @@
 
 requirejs.config
     urlArgs: Math.random()
-    baseUrl: "js"
+    baseUrl: "../vendor/halal/js/"
     paths:
-        "jquery": "../vendor/jquery/jquery.min"
-        "jquery-ui": "../vendor/jquery-ui/ui/minified/jquery-ui.min"
-        "handlebars": "../vendor/handlebars/handlebars.min"
-        "halal": "../vendor/halal/build/halal"
+        "jquery": "../../../vendor/jquery/jquery.min"
+        "jquery-ui": "../../../../../../vendor/jquery-ui/ui/minified/jquery-ui.min"
+        "handlebars": "../../../vendor/handlebars/handlebars.min"
     shim:
         "jquery-ui":
             exports: "$"
             deps: ['jquery']
 
-require ["halal", "IsometricMap"], (Hal, IsometricMap) ->
+require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
     llog.setLevel "DEBUG"
     llogi "Halal loaded"
     Hal.asm.loadSpritesFromFileList("assets/sprites.list")
     Hal.asm.on "SPRITES_LOADED", () ->
-        require ["MapEditor"], (MapEditor) ->  
+        require ["../../../js/MapEditor"], (MapEditor) ->  
             llogi "MapEditor loaded"      
             isomap = new IsometricMap
                 name: "Amjad"

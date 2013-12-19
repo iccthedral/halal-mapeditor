@@ -2,12 +2,11 @@
   "use strict";
   requirejs.config({
     urlArgs: Math.random(),
-    baseUrl: "js",
+    baseUrl: "../vendor/halal/js/",
     paths: {
-      "jquery": "../vendor/jquery/jquery.min",
-      "jquery-ui": "../vendor/jquery-ui/ui/minified/jquery-ui.min",
-      "handlebars": "../vendor/handlebars/handlebars.min",
-      "halal": "../vendor/halal/build/halal"
+      "jquery": "../../../vendor/jquery/jquery.min",
+      "jquery-ui": "../../../../../../vendor/jquery-ui/ui/minified/jquery-ui.min",
+      "handlebars": "../../../vendor/handlebars/handlebars.min"
     },
     shim: {
       "jquery-ui": {
@@ -17,12 +16,12 @@
     }
   });
 
-  require(["halal", "IsometricMap"], function(Hal, IsometricMap) {
+  require(["halal", "../../../js/IsometricMap"], function(Hal, IsometricMap) {
     llog.setLevel("DEBUG");
     llogi("Halal loaded");
     Hal.asm.loadSpritesFromFileList("assets/sprites.list");
     return Hal.asm.on("SPRITES_LOADED", function() {
-      return require(["MapEditor"], function(MapEditor) {
+      return require(["../../../js/MapEditor"], function(MapEditor) {
         var isomap;
         llogi("MapEditor loaded");
         isomap = new IsometricMap({
@@ -34,7 +33,9 @@
           bg_color: "gray",
           draw_camera_center: true,
           draw_quadspace: false,
-          draw_stat: true
+          draw_stat: true,
+          mask: Hal.asm.getSprite("tilemask_128x64"),
+          max_layers: 6
         });
         isomap.pause();
         Hal.addScene(isomap);
