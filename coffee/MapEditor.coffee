@@ -1,17 +1,22 @@
 "use strict"
 
 
-define ["jquery-ui", "handlebars", "halal"], 
+define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"], 
 
-($) ->
-
+($, MetaConfig) ->
+    MAP = null
     ### let's define some helpers ###
     Handlebars.registerHelper "create_options", (values, options) ->
         out = ""
         values.forEach (elem) ->
             out += "<option value='#{elem}'>#{elem}</option>" #$("<option/>")
         return new Handlebars.SafeString(out)
-   
+
+    Hal.on "MAP_ADDED", (isomap) =>
+        MAP = isomap
+        MAP.on "TILE_MANAGER_LOADED", () =>
+            showLayers(0)
+
     Hal.on "MAP_SAVED", (saved_map, start) =>
         console.debug saved_map
         console.debug start
@@ -27,7 +32,6 @@ define ["jquery-ui", "handlebars", "halal"],
         console.debug "Map section #{start} successfully saved"
 
     socket.on "LOAD_TILES", (tiles) ->
-        console.debug tiles
         for i, t of tiles
             tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
             st = createTileFromSprite(t.sprite)
@@ -36,6 +40,7 @@ define ["jquery-ui", "handlebars", "halal"],
             st.layer = t.layer
             st.id = t.id
             addTileToTilesDialog(st, tw)
+
         Hal.trigger "TILE_MNGR_LOAD_TILES", tiles
 
     SelectableDragable = 
@@ -122,7 +127,7 @@ define ["jquery-ui", "handlebars", "halal"],
     current_sprite_folder   = ""
     all_folders             = Hal.asm.getSpriteFolders()
     selected_mode           = null
-    num_layers              = 6
+    # num_layers              = MetaConfig.MAX_LAYERS
     selected_layer          = 0
 
     ### Setup editing bar listeners ###
@@ -238,6 +243,18 @@ define ["jquery-ui", "handlebars", "halal"],
 
     hud_zindex = +Hal.dom.hud.style["z-index"]
 
+    showLayers = (layer) ->
+        $TilesContainerContent.empty()
+        tiles = MAP.tm.getAllByLayer(layer)
+        for i, t of tiles
+            tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
+            st = createTileFromSprite(t.sprite)
+            st.name = t.name
+            st.size = t.size
+            st.layer = t.layer
+            st.id = t.id
+            addTileToTilesDialog(st, tw)
+
     createSpriteBoxFromSprite = (spr, clone = false) ->
         sprBox = $(SelectableBox)
         sprBox.attr("id", "sprite")
@@ -304,7 +321,7 @@ define ["jquery-ui", "handlebars", "halal"],
             layer: tile.layer
             sprite: tile.sprite
             minigrid: createMiniGrid(tile.sprite, tile.size)
-            layers: new Array(num_layers).join(0).split(0).map (_,i) -> i
+            layers: new Array(MetaConfig.MAX_LAYERS).join(0).split(0).map (_,i) -> i
         }))
         $CenterTileDialogContent.append($TileForm)
 
@@ -334,6 +351,7 @@ define ["jquery-ui", "handlebars", "halal"],
             Hal.trigger "TILE_MNGR_NEW_TILE", t
             socket.emit "TILE_SAVED", JSON.stringify(t)
             $CenterTileDialog.hide "clip"
+            showLayers(t.layer)
             return t
 
     createMiniGrid = (sprname, encodednum) ->
@@ -410,7 +428,7 @@ define ["jquery-ui", "handlebars", "halal"],
 
     createLayerCircleBtns = () ->
         out = ""
-        for i in [0...num_layers]
+        for i in [0...MetaConfig.MAX_LAYERS]
             out +=
             """
                 <div id="layer" layer='#{i}' class='circle'>
@@ -456,17 +474,18 @@ define ["jquery-ui", "handlebars", "halal"],
                 $layer = $panel.parent()
                 $layer.toggleClass "circle-anim"
                 selected_layer = $layer.attr("layer")
-                console.debug "selected layer: #{selected_layer}"
-            else if $panel.attr("markers") isnt "true"
-                $panel.toggleClass "circle-anim"
-                $panel.attr("markers", "true")
-                $panel.empty()
-                $panel.toggleClass "circle-anim"
-            else    
-                $panel.empty()
-                $panel.attr("markers", "false")
-                $panel.append(createLayerCircleBtns())
-                $panel.toggleClass "circle-anim"
+                showLayers(selected_layer)
+                # Hal.trigger "TILE_MNGR_LOAD_TILES", tiles
+            # else if $panel.attr("markers") isnt "true"
+            #     $panel.toggleClass "circle-anim"
+            #     $panel.attr("markers", "true")
+            #     $panel.empty()
+            #     $panel.toggleClass "circle-anim"
+            # else    
+            #     $panel.empty()
+            #     $panel.attr("markers", "false")
+            #     $panel.append(createLayerCircleBtns())
+            #     $panel.toggleClass "circle-anim"
 
                 # $panel.empty()
                 #$TilesContainerTBox.replaceWith(createLayerCircleBtns())

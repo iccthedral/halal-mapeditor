@@ -12,9 +12,10 @@ requirejs.config
             exports: "$"
             deps: ['jquery']
 
-require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
+require ["halal", "../../../js/IsometricMap", "../../../js/MetaConfig"], (Hal, IsometricMap, MetaConfig) ->
     llog.setLevel "DEBUG"
     llogi "Halal loaded"
+    
     Hal.asm.loadSpritesFromFileList("assets/sprites.list")
     Hal.asm.on "SPRITES_LOADED", () ->
         require ["../../../js/MapEditor"], (MapEditor) ->  
@@ -30,10 +31,11 @@ require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
                 draw_quadspace: false
                 draw_stat: true
                 mask: Hal.asm.getSprite("editor/tilemask_128x64")
-                max_layers: 6
+                max_layers: MetaConfig.MAX_LAYERS
                 
             isomap.pause()
             Hal.addScene(isomap)
+            Hal.trigger "MAP_ADDED", isomap
             isomap.pause()
             isomap.on "MAP_TILES_INITIALIZED", () ->
                     center = @worldCenterTile()
@@ -45,6 +47,3 @@ require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
                         isomap.resume()
                         Hal.fadeInViewport(1000)
                         Hal.debug(true)
-
-
-
