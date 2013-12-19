@@ -6,8 +6,8 @@ define ["halal"], (Hal) ->
         constructor: (meta) ->
             super(meta)
 
-    IsometricMap::init = (meta) ->
-        super(meta)
+    IsometricMap::init = () ->
+        super()
         ### @SUPPORTED_EDITOR_MODES ###
         @supported_modes = {}
         @saved_sections = {}

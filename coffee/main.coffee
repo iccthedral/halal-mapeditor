@@ -18,7 +18,7 @@ require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
     Hal.asm.loadSpritesFromFileList("assets/sprites.list")
     Hal.asm.on "SPRITES_LOADED", () ->
         require ["../../../js/MapEditor"], (MapEditor) ->  
-            llogi "MapEditor loaded"      
+            llogi "MapEditor loaded"
             isomap = new IsometricMap
                 name: "Amjad"
                 tilew: 128
@@ -29,7 +29,7 @@ require ["halal", "../../../js/IsometricMap"], (Hal, IsometricMap) ->
                 draw_camera_center: true
                 draw_quadspace: false
                 draw_stat: true
-                mask: Hal.asm.getSprite("tilemask_128x64")
+                mask: Hal.asm.getSprite("editor/tilemask_128x64")
                 max_layers: 6
                 
             isomap.pause()

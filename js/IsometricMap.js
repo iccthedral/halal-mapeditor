@@ -15,9 +15,9 @@
       return IsometricMap;
 
     })(Hal.IsometricScene);
-    IsometricMap.prototype.init = function(meta) {
+    IsometricMap.prototype.init = function() {
       var _this = this;
-      IsometricMap.__super__.init.call(this, meta);
+      IsometricMap.__super__.init.call(this);
       /* @SUPPORTED_EDITOR_MODES*/
 
       this.supported_modes = {};
