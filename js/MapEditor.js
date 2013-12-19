@@ -23,6 +23,9 @@
     });
     socket = io.connect('http://localhost:8080');
     socket.emit("LOAD_MAPEDITOR_ASSETS");
+    socket.on("TILE_ADDED", function(tile) {
+      return Hal.trigger("TILE_MNGR_NEW_TILE", tile);
+    });
     socket.on("MAP_SECTION_SAVED", function(start) {
       return console.debug("Map section " + start + " successfully saved");
     });
