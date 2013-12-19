@@ -92,6 +92,8 @@ module.exports = (grunt) ->
     #load all tiles
     all_tiles = do getAllTiles = () ->
         generating_seed = default_seed = 0xABCDEF
+        if not fs.existsSync(config.tiles)
+            return []
         out = fs.readFileSync(config.tiles)
         out = JSON.parse(out)
         for key, tile of out
