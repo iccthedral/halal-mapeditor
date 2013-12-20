@@ -53,10 +53,7 @@ define ["halal"], (Hal) ->
             Hal.trigger "MAP_SAVED", save, coords
 
         @supported_modes["mode-place"] = () =>
-            return if not @tile_under_mouse? or not @selected_tile?
-            @selected_tile_x = @selected_tile_sprite.w2
-            @selected_tile_y = @selected_tile_sprite.h - @tileh2
-            @tm.loadTileLayerById(@tile_under_mouse, @selected_tile.id)
+            @placeTileLayerUnderMouse()
             # t = @tm.addTileLayerMeta(
             #     @tile_under_mouse.row, @tile_under_mouse.col,
             #     @selected_tile, @selected_tile_x, @selected_tile_y #,@selected_tile.layer
@@ -68,6 +65,7 @@ define ["halal"], (Hal) ->
 
     IsometricMap::initListeners = () ->
         super()
+        @persist_tile_placement = false
         ###map editor stuff###
         @editor_mode_listener =
         Hal.on "EDITOR_MODE_CHANGED", (mode) =>
@@ -125,12 +123,12 @@ define ["halal"], (Hal) ->
             
         @on "OVER_NEW_TILE", (newtile) ->
             if @tile_under_mouse?
-                @tile_under_mouse.attr("stroke_color", "white")
-                @tile_under_mouse.attr("stroke_width", 0.5)
                 ind = @visible_ents.indexOf(@tile_under_mouse)
                 if ind isnt -1
                     @visible_ents.splice(ind, 1)
-                    
+                @tile_under_mouse.attr("stroke_color", "white")
+                @tile_under_mouse.attr("stroke_width", 0.5)
+
             @visible_ents.push(newtile)
             newtile.attr("stroke_color", "red")
             newtile.attr("stroke_width", 2)
@@ -146,7 +144,27 @@ define ["halal"], (Hal) ->
                         from: @position[1]
                         to: @position[1] + 10
                         duration: 300
-        
+
+        @setMouseMoveListener(
+            (pos) ->
+                if @current_mode is "mode-place" and @persist_tile_placement
+                    @placeTileLayerUnderMouse()
+        )
+
+        Hal.on "KEY_DOWN", (ev) =>
+            if ev.keyCode is Hal.Keys.SHIFT
+                @persist_tile_placement = not @persist_tile_placement
+                if @persist_tile_placement
+                    @disablePanning()
+                else
+                    @enablePanning()
+
+    IsometricMap::placeTileLayerUnderMouse = () ->
+        return if not @tile_under_mouse? or not @selected_tile?
+        @selected_tile_x = @selected_tile_sprite.w2
+        @selected_tile_y = @selected_tile_sprite.h - @tileh2
+        @tm.loadTileLayerById(@tile_under_mouse, @selected_tile.id)
+
     IsometricMap::destroy = () ->
         super()
         Hal.removeTrigger "EDITOR_MODE_CHANGED", @editor_mode_listener

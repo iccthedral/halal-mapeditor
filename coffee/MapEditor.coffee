@@ -5,6 +5,8 @@ define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"],
 
 ($, MetaConfig) ->
     MAP = null
+    hud_zindex = +$(Hal.dom.hud).css("z-index")
+
     ### let's define some helpers ###
     Handlebars.registerHelper "create_options", (values, options) ->
         out = ""
@@ -43,7 +45,9 @@ define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"],
 
     socket.on "LOAD_TILES", (tiles) ->
         for i, t of tiles
-            tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
+            sprite = Hal.asm.getSprite(t.sprite)
+            continue if not sprite?
+            tw = createSpriteBoxFromSprite(sprite, true)
             st = createTileFromSprite(t.sprite)
             st.name = t.name
             st.size = t.size
@@ -150,7 +154,6 @@ define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"],
     all_folders             = Hal.asm.getSpriteFolders()
     selected_mode           = null
     selected_layer          = 0
-    hud_zindex = +Hal.dom.hud.style["z-index"]
 
     ### Setup editing bar listeners ###
     $EditingBar.click (ev) ->
@@ -280,7 +283,9 @@ define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"],
         $TilesContainerContent.empty()
         tiles = MAP.tm.getAllByLayer(layer)
         for i, t of tiles
-            tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
+            sprite = Hal.asm.getSprite(t.sprite)
+            continue if not sprite?
+            tw = createSpriteBoxFromSprite(sprite, true)
             st = createTileFromSprite(t.sprite)
             st.name = t.name
             st.size = t.size
@@ -389,6 +394,9 @@ define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"],
 
     createMiniGrid = (sprname, encodednum) ->
         spr         = Hal.asm.getSprite(sprname)
+        if not spr?
+            console.error "Sprite doesn't exist: #{sprname}"
+            return "n/a"
         h           = Math.pow(2, ~~(Math.log(spr.h-1)/Math.LN2) + 1)
         factor      = 16
         size        = 128

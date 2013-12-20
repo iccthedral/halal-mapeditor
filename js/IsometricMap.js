@@ -54,12 +54,7 @@
         return Hal.trigger("MAP_SAVED", save, coords);
       };
       this.supported_modes["mode-place"] = function() {
-        if ((_this.tile_under_mouse == null) || (_this.selected_tile == null)) {
-          return;
-        }
-        _this.selected_tile_x = _this.selected_tile_sprite.w2;
-        _this.selected_tile_y = _this.selected_tile_sprite.h - _this.tileh2;
-        _this.tm.loadTileLayerById(_this.tile_under_mouse, _this.selected_tile.id);
+        _this.placeTileLayerUnderMouse();
       };
       this.current_mode = "mode-default";
       return this.current_mode_clb = this.supported_modes[this.current_mode];
@@ -67,6 +62,7 @@
     IsometricMap.prototype.initListeners = function() {
       var _this = this;
       IsometricMap.__super__.initListeners.call(this);
+      this.persist_tile_placement = false;
       /*map editor stuff*/
 
       this.editor_mode_listener = Hal.on("EDITOR_MODE_CHANGED", function(mode) {
@@ -125,15 +121,15 @@
           }
         }
       });
-      return this.on("OVER_NEW_TILE", function(newtile) {
+      this.on("OVER_NEW_TILE", function(newtile) {
         var ind;
         if (this.tile_under_mouse != null) {
-          this.tile_under_mouse.attr("stroke_color", "white");
-          this.tile_under_mouse.attr("stroke_width", 0.5);
           ind = this.visible_ents.indexOf(this.tile_under_mouse);
           if (ind !== -1) {
             this.visible_ents.splice(ind, 1);
           }
+          this.tile_under_mouse.attr("stroke_color", "white");
+          this.tile_under_mouse.attr("stroke_width", 0.5);
         }
         this.visible_ents.push(newtile);
         newtile.attr("stroke_color", "red");
@@ -154,6 +150,29 @@
           });
         }
       });
+      this.setMouseMoveListener(function(pos) {
+        if (this.current_mode === "mode-place" && this.persist_tile_placement) {
+          return this.placeTileLayerUnderMouse();
+        }
+      });
+      return Hal.on("KEY_DOWN", function(ev) {
+        if (ev.keyCode === Hal.Keys.SHIFT) {
+          _this.persist_tile_placement = !_this.persist_tile_placement;
+          if (_this.persist_tile_placement) {
+            return _this.disablePanning();
+          } else {
+            return _this.enablePanning();
+          }
+        }
+      });
+    };
+    IsometricMap.prototype.placeTileLayerUnderMouse = function() {
+      if ((this.tile_under_mouse == null) || (this.selected_tile == null)) {
+        return;
+      }
+      this.selected_tile_x = this.selected_tile_sprite.w2;
+      this.selected_tile_y = this.selected_tile_sprite.h - this.tileh2;
+      return this.tm.loadTileLayerById(this.tile_under_mouse, this.selected_tile.id);
     };
     IsometricMap.prototype.destroy = function() {
       IsometricMap.__super__.destroy.call(this);

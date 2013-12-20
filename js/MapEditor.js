@@ -4,6 +4,7 @@
     var $BackIcon, $CenterTileDialog, $CenterTileDialogContent, $CenterTileDialogTBox, $EditingBar, $MarkerNameInput, $MarkersButtons, $MarkersContainer, $MarkersContainerContent, $MarkersContainerHolder, $MarkersContainerTBox, $SpritesContainer, $SpritesContainerContent, $SpritesContainerTBox, $TilesContainer, $TilesContainerContent, $TilesContainerHolder, $TilesContainerTBox, FolderBox, MAP, MarkerBox, SelectableBox, SelectableBoxTitle, SelectableDragable, TileForm, addNewMarker, addTileToTilesDialog, all_folders, createLayerCircleBtns, createMiniGrid, createSpriteBoxFromSprite, createTileFromSprite, current_sprite_folder, displaySpritesAndFolders, fillTilePropertyForm, hud_zindex, onFolderClick, parseMiniGridSize, parseTileInfo, prev_sprite_folder, selected_layer, selected_mode, showLayers, socket, tpl_select_drag, tpl_title,
       _this = this;
     MAP = null;
+    hud_zindex = +$(Hal.dom.hud).css("z-index");
     /* let's define some helpers*/
 
     Handlebars.registerHelper("create_options", function(values, options) {
@@ -54,10 +55,14 @@
       return Hal.trigger("TILE_MNGR_LOAD_MARKERS", markers);
     });
     socket.on("LOAD_TILES", function(tiles) {
-      var i, st, t, tw;
+      var i, sprite, st, t, tw;
       for (i in tiles) {
         t = tiles[i];
-        tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true);
+        sprite = Hal.asm.getSprite(t.sprite);
+        if (sprite == null) {
+          continue;
+        }
+        tw = createSpriteBoxFromSprite(sprite, true);
         st = createTileFromSprite(t.sprite);
         st.name = t.name;
         st.size = t.size;
@@ -83,7 +88,6 @@
     all_folders = Hal.asm.getSpriteFolders();
     selected_mode = null;
     selected_layer = 0;
-    hud_zindex = +Hal.dom.hud.style["z-index"];
     /* Setup editing bar listeners*/
 
     $EditingBar.click(function(ev) {
@@ -218,13 +222,17 @@
       });
     };
     showLayers = function(layer) {
-      var i, st, t, tiles, tw, _results;
+      var i, sprite, st, t, tiles, tw, _results;
       $TilesContainerContent.empty();
       tiles = MAP.tm.getAllByLayer(layer);
       _results = [];
       for (i in tiles) {
         t = tiles[i];
-        tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true);
+        sprite = Hal.asm.getSprite(t.sprite);
+        if (sprite == null) {
+          continue;
+        }
+        tw = createSpriteBoxFromSprite(sprite, true);
         st = createTileFromSprite(t.sprite);
         st.name = t.name;
         st.size = t.size;
@@ -348,6 +356,10 @@
     createMiniGrid = function(sprname, encodednum) {
       var $cell, $parent, $wrapper, bin, diagonal, diff, factor, h, i, j, k, numcols, numrows, size, spr, w, _i, _j;
       spr = Hal.asm.getSprite(sprname);
+      if (spr == null) {
+        console.error("Sprite doesn't exist: " + sprname);
+        return "n/a";
+      }
       h = Math.pow(2, ~~(Math.log(spr.h - 1) / Math.LN2) + 1);
       factor = 16;
       size = 128;
