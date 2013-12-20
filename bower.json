@@ -6,6 +6,6 @@
         "jquery": null,
         "jquery-ui": null,
         "handlebars": null,
-        "halal": "git@github.com:iccthedral/halal.git"
+        "halal": "https://github.com/iccthedral/halal.git"
     }
 }

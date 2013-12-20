@@ -1,10 +1,11 @@
 (function() {
   "use strict";
-  define(["jquery-ui", "handlebars", "halal"], function($) {
+  define(["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"], function($, MetaConfig) {
+    var $BackIcon, $CenterTileDialog, $CenterTileDialogContent, $CenterTileDialogTBox, $EditingBar, $MarkerNameInput, $MarkersButtons, $MarkersContainer, $MarkersContainerContent, $MarkersContainerHolder, $MarkersContainerTBox, $SpritesContainer, $SpritesContainerContent, $SpritesContainerTBox, $TilesContainer, $TilesContainerContent, $TilesContainerHolder, $TilesContainerTBox, FolderBox, MAP, MarkerBox, SelectableBox, SelectableBoxTitle, SelectableDragable, TileForm, addNewMarker, addTileToTilesDialog, all_folders, createLayerCircleBtns, createMiniGrid, createSpriteBoxFromSprite, createTileFromSprite, current_sprite_folder, displaySpritesAndFolders, fillTilePropertyForm, hud_zindex, onFolderClick, parseMiniGridSize, parseTileInfo, prev_sprite_folder, selected_layer, selected_mode, showLayers, socket, tpl_select_drag, tpl_title,
+      _this = this;
+    MAP = null;
     /* let's define some helpers*/
 
-    var $BackIcon, $CenterTileDialog, $CenterTileDialogContent, $CenterTileDialogTBox, $EditingBar, $MarkersContainer, $MarkersContainerContent, $MarkersContainerHolder, $MarkersContainerTBox, $SpritesContainer, $SpritesContainerContent, $SpritesContainerTBox, $TilesContainer, $TilesContainerContent, $TilesContainerHolder, $TilesContainerTBox, FolderBox, SelectableBox, SelectableBoxTitle, SelectableDragable, TileForm, addTileToTilesDialog, all_folders, createLayerCircleBtns, createMiniGrid, createSpriteBoxFromSprite, createTileFromSprite, current_sprite_folder, displaySpritesAndFolders, fillTilePropertyForm, hud_zindex, num_layers, onFolderClick, parseMiniGridSize, parseTileInfo, prev_sprite_folder, selected_layer, selected_mode, socket, tpl_select_drag, tpl_title,
-      _this = this;
     Handlebars.registerHelper("create_options", function(values, options) {
       var out;
       out = "";
@@ -12,6 +13,12 @@
         return out += "<option value='" + elem + "'>" + elem + "</option>";
       });
       return new Handlebars.SafeString(out);
+    });
+    Hal.on("MAP_ADDED", function(isomap) {
+      MAP = isomap;
+      return MAP.on("TILE_MANAGER_LOADED", function() {
+        return showLayers(0);
+      });
     });
     Hal.on("MAP_SAVED", function(saved_map, start) {
       console.debug(saved_map);
@@ -23,12 +30,21 @@
     });
     socket = io.connect('http://localhost:8080');
     socket.emit("LOAD_MAPEDITOR_ASSETS");
+    socket.on("MARKER_ADDED", function(marker) {
+      addNewMarker(marker);
+      return Hal.trigger("TILE_MNGR_NEW_MARKER", marker);
+    });
+    socket.on("TILE_ADDED", function(tile) {
+      return Hal.trigger("TILE_MNGR_NEW_TILE", tile);
+    });
     socket.on("MAP_SECTION_SAVED", function(start) {
       return console.debug("Map section " + start + " successfully saved");
     });
+    socket.on("LOAD_MARKERS", function(markers) {
+      return Hal.trigger("TILE_MNGR_LOAD_MARKERS", markers);
+    });
     socket.on("LOAD_TILES", function(tiles) {
       var i, st, t, tw;
-      console.debug(tiles);
       for (i in tiles) {
         t = tiles[i];
         tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true);
@@ -41,21 +57,23 @@
       }
       return Hal.trigger("TILE_MNGR_LOAD_TILES", tiles);
     });
-    SelectableDragable = "<div id = {{id}} class=\"selectable\">\n    <div class=\"title-container\">\n        <h5 id=\"title\"> {{title}} </h5>\n        <div class=\"title-buttons\">\n            <i id=\"toggle-show\" class=\"fa fa-minus-circle\"></i>\n        </div>\n    </div>\n    <div class=\"holder\">\n        <div class=\"toolbox\">\n            {{{tools}}}\n        </div>\n        <div class=\"content\">\n    </div>\n    </div>\n</div>";
+    SelectableDragable = "<div id = {{id}} class=\"selectable\">\n    <div class=\"holder\">\n        <div class=\"toolbox\">\n            {{{tools}}}\n        </div>\n        <div class=\"content\">\n        </div>\n    </div>        \n    <div class=\"title-container\">\n        <h5 id=\"title\"> {{title}} </h5>\n        <div class=\"title-buttons\">\n            <i id=\"toggle-show\" class=\"fa fa-minus-circle\"></i>\n        </div>\n    </div>\n</div>";
     TileForm = "<div class=\"keyval\">\n    <div>\n        <label for=\"name\">Name</label>\n        <input id=\"tile-name\" type=\"text\" value=\"{{name}}\"></input>\n    </div>\n\n    <div>\n        <label for=\"layer\">Layer</label>\n        <select id=\"tile-layer\">\n        {{create_options layers}}\n        </select>\n    </div>\n\n    <div>\n        <label for=\"minigrid\"> Size </label>\n        {{{minigrid}}}\n    </div>\n</div>\n<button id=\"save-tile\" type=\"button\" class=\"tileform-button\"> Save </button>";
     SelectableBox = "<li class=\"selectable-box\">\n</li>";
     SelectableBoxTitle = "<span class=\"selectable-title\">\n    {{title}}\n</span>";
     FolderBox = "<i class=\"fa fa-folder-open\"></i>";
+    MarkerBox = "<i class=\"fa fa-file\"></i>";
     $BackIcon = $("<i class=\"fa fa-arrow-circle-left\"></i>");
     $EditingBar = $("<div class=\"editing-bar\">\n    <i id=\"mode-place\" class=\"fa fa-edit\"></i>\n    <i id=\"mode-erase\" class=\"fa fa-times\"></i>\n    <i id=\"mode-default\" class=\"fa fa-ban\"></i>\n    <i id=\"map-save\" class=\"fa fa-save\"></i>\n    <i id=\"map-load\" class=\"fa fa-refresh\"></i>\n</div>");
+    $MarkersButtons = $("<div class=\"marker-buttons\">\n    <i id=\"add-new-marker\" class=\"fa fa-plus-circle\"></i>\n    <input type=\"text\" id=\"marker-name\"></input>\n</div>");
     tpl_select_drag = Handlebars.compile(SelectableDragable);
     tpl_title = Handlebars.compile(SelectableBoxTitle);
     prev_sprite_folder = "";
     current_sprite_folder = "";
     all_folders = Hal.asm.getSpriteFolders();
     selected_mode = null;
-    num_layers = 6;
     selected_layer = 0;
+    hud_zindex = +Hal.dom.hud.style["z-index"];
     /* Setup editing bar listeners*/
 
     $EditingBar.click(function(ev) {
@@ -75,16 +93,16 @@
       title: "Sprites",
       id: "sprite-container"
     }));
-    $SpritesContainer.css("top", "20px");
-    $SpritesContainer.css("right", "50px");
-    $SpritesContainer.draggable();
+    $SpritesContainer.css("bottom", "0px");
+    $SpritesContainer.css("position", "fixed");
+    $SpritesContainer.css("left", "0px");
     $SpritesContainerContent = $SpritesContainer.find(".content");
     $SpritesContainerTBox = $SpritesContainer.find(".toolbox");
     $SpritesContainer.find("#toggle-show").click(function() {
       var holder;
       holder = $(this).parents(".selectable").last().find(".holder").first();
       holder.toggle("slide", {
-        direction: "up"
+        direction: "down"
       });
       return $(this).toggleClass("fa-minus-circle fa-plus-circle");
     });
@@ -96,10 +114,9 @@
       title: "Tiles",
       id: "tiles-container"
     }));
-    $TilesContainer.css("top", "337px");
-    $TilesContainer.css("position", "absolute");
-    $TilesContainer.css("right", "50px");
-    $TilesContainer.draggable();
+    $TilesContainer.css("bottom", "0px");
+    $TilesContainer.css("position", "fixed");
+    $TilesContainer.css("left", "305px");
     $TilesContainerHolder = $TilesContainer.find(".holder");
     $TilesContainerContent = $TilesContainer.find(".content");
     $TilesContainerTBox = $TilesContainer.find(".toolbox");
@@ -107,7 +124,7 @@
       var holder;
       holder = $(this).parents(".selectable").last().find(".holder").first();
       holder.toggle("slide", {
-        direction: "up"
+        direction: "down"
       });
       return $(this).toggleClass("fa-minus-circle fa-plus-circle");
     });
@@ -119,20 +136,37 @@
       title: "Map markers",
       id: "markers-container"
     }));
-    $MarkersContainer.css("top", "337px");
-    $MarkersContainer.css("position", "absolute");
-    $MarkersContainer.css("right", "50px");
+    $MarkersContainer.css("bottom", "0px");
+    $MarkersContainer.css("position", "fixed");
+    $MarkersContainer.css("left", "610px");
     $MarkersContainer.draggable();
     $MarkersContainerHolder = $MarkersContainer.find(".holder");
     $MarkersContainerContent = $MarkersContainer.find(".content");
     $MarkersContainerTBox = $MarkersContainer.find(".toolbox");
+    $MarkersContainerTBox.append($MarkersButtons);
     $MarkersContainer.find("#toggle-show").click(function() {
       var holder;
       holder = $(this).parents(".selectable").last().find(".holder").first();
       holder.toggle("slide", {
-        direction: "up"
+        direction: "down"
       });
       return $(this).toggleClass("fa-minus-circle fa-plus-circle");
+    });
+    $MarkerNameInput = $MarkersButtons.find("input");
+    $MarkersButtons.find("#add-new-marker").click(function() {
+      return $MarkerNameInput.toggle("slide", {
+        direction: "left",
+        done: function() {
+          return alert("bla");
+        }
+      });
+    });
+    $MarkerNameInput.on("keyup", function(ev) {
+      var val;
+      if (ev.keyCode === 13) {
+        val = $(this).val();
+        return socket.emit("MARKER_SAVED", val);
+      }
     });
     /*
         Tile editing container
@@ -159,7 +193,37 @@
       holder = $(this).parents(".selectable");
       return holder.toggle("clip");
     });
-    hud_zindex = +Hal.dom.hud.style["z-index"];
+    addNewMarker = function(marker) {
+      var markerBox;
+      markerBox = $(SelectableBox);
+      markerBox.css("text-align", "center");
+      markerBox.attr("id", marker);
+      markerBox.append(MarkerBox);
+      markerBox.append(tpl_title({
+        title: marker
+      }));
+      $MarkersContainerContent.append(markerBox);
+      return markerBox.click(function() {
+        return Hal.trigger("MARKER_SELECTED", marker);
+      });
+    };
+    showLayers = function(layer) {
+      var i, st, t, tiles, tw, _results;
+      $TilesContainerContent.empty();
+      tiles = MAP.tm.getAllByLayer(layer);
+      _results = [];
+      for (i in tiles) {
+        t = tiles[i];
+        tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true);
+        st = createTileFromSprite(t.sprite);
+        st.name = t.name;
+        st.size = t.size;
+        st.layer = t.layer;
+        st.id = t.id;
+        _results.push(addTileToTilesDialog(st, tw));
+      }
+      return _results;
+    };
     createSpriteBoxFromSprite = function(spr, clone) {
       var sprBox;
       if (clone == null) {
@@ -238,7 +302,7 @@
         layer: tile.layer,
         sprite: tile.sprite,
         minigrid: createMiniGrid(tile.sprite, tile.size),
-        layers: new Array(num_layers).join(0).split(0).map(function(_, i) {
+        layers: new Array(MetaConfig.MAX_LAYERS).join(0).split(0).map(function(_, i) {
           return i;
         })
       }));
@@ -267,6 +331,7 @@
         Hal.trigger("TILE_MNGR_NEW_TILE", t);
         socket.emit("TILE_SAVED", JSON.stringify(t));
         $CenterTileDialog.hide("clip");
+        showLayers(t.layer);
         return t;
       });
     };
@@ -344,9 +409,9 @@
       return binaryString;
     };
     createLayerCircleBtns = function() {
-      var i, out, _i;
+      var i, out, _i, _ref;
       out = "";
-      for (i = _i = 0; 0 <= num_layers ? _i < num_layers : _i > num_layers; i = 0 <= num_layers ? ++_i : --_i) {
+      for (i = _i = 0, _ref = MetaConfig.MAX_LAYERS; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         out += "<div id=\"layer\" layer='" + i + "' class='circle'>\n    <span id=\"layer-text\">" + i + "</span>\n</div>";
       }
       return out;
@@ -376,6 +441,7 @@
       displaySpritesAndFolders($SpritesContainerContent, null, all_folders);
       $domlayer.append($SpritesContainer);
       $domlayer.append($CenterTileDialog);
+      $domlayer.append($MarkersContainer);
       $TilesContainerTBox.append(createLayerCircleBtns());
       $TilesContainerTBox.click(function(ev) {
         /* 
@@ -389,17 +455,7 @@
           $layer = $panel.parent();
           $layer.toggleClass("circle-anim");
           selected_layer = $layer.attr("layer");
-          return console.debug("selected layer: " + selected_layer);
-        } else if ($panel.attr("markers") !== "true") {
-          $panel.toggleClass("circle-anim");
-          $panel.attr("markers", "true");
-          $panel.empty();
-          return $panel.toggleClass("circle-anim");
-        } else {
-          $panel.empty();
-          $panel.attr("markers", "false");
-          $panel.append(createLayerCircleBtns());
-          return $panel.toggleClass("circle-anim");
+          return showLayers(selected_layer);
         }
       });
       $TilesContainerHolder.droppable({

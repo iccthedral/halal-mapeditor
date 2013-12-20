@@ -1,17 +1,22 @@
 "use strict"
 
 
-define ["jquery-ui", "handlebars", "halal"], 
+define ["jquery-ui", "../../../js/MetaConfig", "handlebars", "halal"], 
 
-($) ->
-
+($, MetaConfig) ->
+    MAP = null
     ### let's define some helpers ###
     Handlebars.registerHelper "create_options", (values, options) ->
         out = ""
         values.forEach (elem) ->
             out += "<option value='#{elem}'>#{elem}</option>" #$("<option/>")
         return new Handlebars.SafeString(out)
-   
+
+    Hal.on "MAP_ADDED", (isomap) =>
+        MAP = isomap
+        MAP.on "TILE_MANAGER_LOADED", () =>
+            showLayers(0)
+
     Hal.on "MAP_SAVED", (saved_map, start) =>
         console.debug saved_map
         console.debug start
@@ -20,14 +25,20 @@ define ["jquery-ui", "handlebars", "halal"],
     socket = io.connect('http://localhost:8080')
     socket.emit "LOAD_MAPEDITOR_ASSETS"
 
+    socket.on "MARKER_ADDED", (marker) ->
+        addNewMarker(marker)
+        Hal.trigger "TILE_MNGR_NEW_MARKER", marker
+
     socket.on "TILE_ADDED", (tile) ->
         Hal.trigger "TILE_MNGR_NEW_TILE", tile
         
     socket.on "MAP_SECTION_SAVED", (start) ->
         console.debug "Map section #{start} successfully saved"
 
+    socket.on "LOAD_MARKERS", (markers) ->
+        Hal.trigger "TILE_MNGR_LOAD_MARKERS", markers
+
     socket.on "LOAD_TILES", (tiles) ->
-        console.debug tiles
         for i, t of tiles
             tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
             st = createTileFromSprite(t.sprite)
@@ -37,22 +48,22 @@ define ["jquery-ui", "handlebars", "halal"],
             st.id = t.id
             addTileToTilesDialog(st, tw)
         Hal.trigger "TILE_MNGR_LOAD_TILES", tiles
-
+    
     SelectableDragable = 
     """
     <div id = {{id}} class="selectable">
-        <div class="title-container">
-            <h5 id="title"> {{title}} </h5>
-            <div class="title-buttons">
-                <i id="toggle-show" class="fa fa-minus-circle"></i>
-            </div>
-        </div>
         <div class="holder">
             <div class="toolbox">
                 {{{tools}}}
             </div>
             <div class="content">
-        </div>
+            </div>
+        </div>        
+        <div class="title-container">
+            <h5 id="title"> {{title}} </h5>
+            <div class="title-buttons">
+                <i id="toggle-show" class="fa fa-minus-circle"></i>
+            </div>
         </div>
     </div>
     """
@@ -98,6 +109,11 @@ define ["jquery-ui", "handlebars", "halal"],
     <i class="fa fa-folder-open"></i>
     """
 
+    MarkerBox = 
+    """
+    <i class="fa fa-file"></i>
+    """
+
     $BackIcon =
     $(
         """
@@ -116,14 +132,22 @@ define ["jquery-ui", "handlebars", "halal"],
         </div>
     """)
 
+    $MarkersButtons = 
+    $("""
+        <div class="marker-buttons">
+            <i id="add-new-marker" class="fa fa-plus-circle"></i>
+            <input type="text" id="marker-name"></input>
+        </div>
+    """)
+
     tpl_select_drag         = Handlebars.compile(SelectableDragable)
     tpl_title               = Handlebars.compile(SelectableBoxTitle)
     prev_sprite_folder      = ""
     current_sprite_folder   = ""
     all_folders             = Hal.asm.getSpriteFolders()
     selected_mode           = null
-    num_layers              = 6
     selected_layer          = 0
+    hud_zindex = +Hal.dom.hud.style["z-index"]
 
     ### Setup editing bar listeners ###
     $EditingBar.click (ev) ->
@@ -138,10 +162,9 @@ define ["jquery-ui", "handlebars", "halal"],
         title: "Sprites"
         id: "sprite-container"
     }))
-    $SpritesContainer.css("top", "20px")
-    $SpritesContainer.css("right", "50px")
-    $SpritesContainer.draggable()
-    # $SpritesContainer.resizable()
+    $SpritesContainer.css("bottom", "0px")
+    $SpritesContainer.css("position", "fixed")
+    $SpritesContainer.css("left", "0px")
     $SpritesContainerContent = 
         $SpritesContainer.find(".content")
     $SpritesContainerTBox =
@@ -149,7 +172,7 @@ define ["jquery-ui", "handlebars", "halal"],
     $SpritesContainer.find("#toggle-show").click () ->
         holder = $(@).parents(".selectable").last().find(".holder").first()
         holder.toggle("slide",
-            direction: "up"
+            direction: "down"
         )
         $(@).toggleClass "fa-minus-circle fa-plus-circle"
 
@@ -160,24 +183,19 @@ define ["jquery-ui", "handlebars", "halal"],
         title: "Tiles"
         id: "tiles-container"
     }))
-    $TilesContainer.css("top", "337px")
-    $TilesContainer.css("position", "absolute")
-    $TilesContainer.css("right", "50px")
-    $TilesContainer.draggable()
-    # $TilesContainer.resizable()
+    $TilesContainer.css("bottom", "0px")
+    $TilesContainer.css("position", "fixed")
+    $TilesContainer.css("left", "305px")
     $TilesContainerHolder = 
         $TilesContainer.find(".holder")
     $TilesContainerContent = 
         $TilesContainer.find(".content")
     $TilesContainerTBox =
         $TilesContainer.find(".toolbox")
-    
-    # TilesContainerTBox.append(createLayerCircleBtns())
-
     $TilesContainer.find("#toggle-show").click () ->
         holder = $(@).parents(".selectable").last().find(".holder").first()
         holder.toggle("slide",
-            direction: "up"
+            direction: "down"
         )
         $(@).toggleClass "fa-minus-circle fa-plus-circle"
 
@@ -188,26 +206,33 @@ define ["jquery-ui", "handlebars", "halal"],
         title: "Map markers"
         id: "markers-container"
     }))
-    $MarkersContainer.css("top", "337px")
-    $MarkersContainer.css("position", "absolute")
-    $MarkersContainer.css("right", "50px")
+    $MarkersContainer.css("bottom", "0px")
+    $MarkersContainer.css("position", "fixed")
+    $MarkersContainer.css("left", "610px")
     $MarkersContainer.draggable()
-    # $TilesContainer.resizable()
     $MarkersContainerHolder = 
         $MarkersContainer.find(".holder")
     $MarkersContainerContent = 
         $MarkersContainer.find(".content")
     $MarkersContainerTBox =
         $MarkersContainer.find(".toolbox")
-    
-    # TilesContainerTBox.append(createLayerCircleBtns())
-
+    $MarkersContainerTBox.append($MarkersButtons)
     $MarkersContainer.find("#toggle-show").click () ->
         holder = $(@).parents(".selectable").last().find(".holder").first()
         holder.toggle("slide",
-            direction: "up"
+            direction: "down"
         )
         $(@).toggleClass "fa-minus-circle fa-plus-circle"
+    $MarkerNameInput = $MarkersButtons.find("input")
+    $MarkersButtons.find("#add-new-marker").click () ->
+        $MarkerNameInput.toggle("slide",
+            direction: "left"
+            done: () -> alert("bla")
+        )
+    $MarkerNameInput.on "keyup", (ev) ->
+        if ev.keyCode is 13
+            val = $(@).val()
+            socket.emit "MARKER_SAVED", val
 
 
     ###
@@ -236,7 +261,29 @@ define ["jquery-ui", "handlebars", "halal"],
         holder = $(@).parents(".selectable")
         holder.toggle("clip")
 
-    hud_zindex = +Hal.dom.hud.style["z-index"]
+    addNewMarker = (marker) ->
+        markerBox = $(SelectableBox)
+        markerBox.css("text-align", "center")
+        markerBox.attr("id", marker)
+        markerBox.append(MarkerBox)
+        markerBox.append(tpl_title({
+            title: marker
+        }))
+        $MarkersContainerContent.append(markerBox)
+        markerBox.click () ->
+            Hal.trigger "MARKER_SELECTED", (marker)
+
+    showLayers = (layer) ->
+        $TilesContainerContent.empty()
+        tiles = MAP.tm.getAllByLayer(layer)
+        for i, t of tiles
+            tw = createSpriteBoxFromSprite(Hal.asm.getSprite(t.sprite), true)
+            st = createTileFromSprite(t.sprite)
+            st.name = t.name
+            st.size = t.size
+            st.layer = t.layer
+            st.id = t.id
+            addTileToTilesDialog(st, tw)
 
     createSpriteBoxFromSprite = (spr, clone = false) ->
         sprBox = $(SelectableBox)
@@ -304,7 +351,7 @@ define ["jquery-ui", "handlebars", "halal"],
             layer: tile.layer
             sprite: tile.sprite
             minigrid: createMiniGrid(tile.sprite, tile.size)
-            layers: new Array(num_layers).join(0).split(0).map (_,i) -> i
+            layers: new Array(MetaConfig.MAX_LAYERS).join(0).split(0).map (_,i) -> i
         }))
         $CenterTileDialogContent.append($TileForm)
 
@@ -334,6 +381,7 @@ define ["jquery-ui", "handlebars", "halal"],
             Hal.trigger "TILE_MNGR_NEW_TILE", t
             socket.emit "TILE_SAVED", JSON.stringify(t)
             $CenterTileDialog.hide "clip"
+            showLayers(t.layer)
             return t
 
     createMiniGrid = (sprname, encodednum) ->
@@ -410,7 +458,7 @@ define ["jquery-ui", "handlebars", "halal"],
 
     createLayerCircleBtns = () ->
         out = ""
-        for i in [0...num_layers]
+        for i in [0...MetaConfig.MAX_LAYERS]
             out +=
             """
                 <div id="layer" layer='#{i}' class='circle'>
@@ -440,6 +488,7 @@ define ["jquery-ui", "handlebars", "halal"],
 
         $domlayer.append($SpritesContainer)
         $domlayer.append($CenterTileDialog)
+        $domlayer.append($MarkersContainer)
 
         $TilesContainerTBox.append(
             createLayerCircleBtns()
@@ -456,17 +505,18 @@ define ["jquery-ui", "handlebars", "halal"],
                 $layer = $panel.parent()
                 $layer.toggleClass "circle-anim"
                 selected_layer = $layer.attr("layer")
-                console.debug "selected layer: #{selected_layer}"
-            else if $panel.attr("markers") isnt "true"
-                $panel.toggleClass "circle-anim"
-                $panel.attr("markers", "true")
-                $panel.empty()
-                $panel.toggleClass "circle-anim"
-            else    
-                $panel.empty()
-                $panel.attr("markers", "false")
-                $panel.append(createLayerCircleBtns())
-                $panel.toggleClass "circle-anim"
+                showLayers(selected_layer)
+                # Hal.trigger "TILE_MNGR_LOAD_TILES", tiles
+            # else if $panel.attr("markers") isnt "true"
+            #     $panel.toggleClass "circle-anim"
+            #     $panel.attr("markers", "true")
+            #     $panel.empty()
+            #     $panel.toggleClass "circle-anim"
+            # else    
+            #     $panel.empty()
+            #     $panel.attr("markers", "false")
+            #     $panel.append(createLayerCircleBtns())
+            #     $panel.toggleClass "circle-anim"
 
                 # $panel.empty()
                 #$TilesContainerTBox.replaceWith(createLayerCircleBtns())

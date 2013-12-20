@@ -2,12 +2,11 @@
   "use strict";
   requirejs.config({
     urlArgs: Math.random(),
-    baseUrl: "js",
+    baseUrl: "../vendor/halal/js/",
     paths: {
-      "jquery": "../vendor/jquery/jquery.min",
-      "jquery-ui": "../vendor/jquery-ui/ui/minified/jquery-ui.min",
-      "handlebars": "../vendor/handlebars/handlebars.min",
-      "halal": "../vendor/halal/build/halal"
+      "jquery": "../../../vendor/jquery/jquery.min",
+      "jquery-ui": "../../../../../../vendor/jquery-ui/ui/minified/jquery-ui.min",
+      "handlebars": "../../../vendor/handlebars/handlebars.min"
     },
     shim: {
       "jquery-ui": {
@@ -17,12 +16,12 @@
     }
   });
 
-  require(["halal", "IsometricMap"], function(Hal, IsometricMap) {
+  require(["halal", "../../../js/IsometricMap", "../../../js/MetaConfig"], function(Hal, IsometricMap, MetaConfig) {
     llog.setLevel("DEBUG");
     llogi("Halal loaded");
-    Hal.asm.loadSpritesFromFileList("assets/sprites.list");
+    Hal.asm.loadViaSocketIO();
     return Hal.asm.on("SPRITES_LOADED", function() {
-      return require(["MapEditor"], function(MapEditor) {
+      return require(["../../../js/MapEditor"], function(MapEditor) {
         var isomap;
         llogi("MapEditor loaded");
         isomap = new IsometricMap({
@@ -30,14 +29,17 @@
           tilew: 128,
           tileh: 64,
           rows: 30,
-          cols: 200,
+          cols: 100,
           bg_color: "gray",
           draw_camera_center: true,
           draw_quadspace: false,
-          draw_stat: true
+          draw_stat: true,
+          mask: Hal.asm.getSprite("editor/tilemask_128x64"),
+          max_layers: MetaConfig.MAX_LAYERS
         });
         isomap.pause();
         Hal.addScene(isomap);
+        Hal.trigger("MAP_ADDED", isomap);
         isomap.pause();
         return isomap.on("MAP_TILES_INITIALIZED", function() {
           var center, name,
@@ -50,7 +52,10 @@
             map.split(",").forEach(function(t) {
               return arr.push(+t);
             });
-            isomap.loadBitmapMap(arr);
+            return isomap.loadBitmapMap(arr);
+          }, function() {
+            return console.error("Error loading map " + name);
+          }, function() {
             isomap.resume();
             Hal.fadeInViewport(1000);
             return Hal.debug(true);

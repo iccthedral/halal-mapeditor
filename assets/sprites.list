@@ -1,8 +1,8 @@
-sprites/tilemask_128x64.png
 sprites/amjad/grid_unit_128x64.png
 sprites/amjad/grid_unit_over_green_128x64.png
 sprites/amjad/grid_unit_over_red_128x64.png
 sprites/amjad/tilemask_128x64.png
+sprites/editor/tilemask_128x64.png
 sprites/konji/arab_trader_on_camel.png
 sprites/konji/deer.png
 sprites/konji/horse.png

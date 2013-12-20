@@ -15,6 +15,7 @@ module.exports = (grunt) ->
         sprite_list: "assets/sprites.list"
         cur_dir: process.cwd()
         tiles: "assets/tiles.list"
+        markers: "assets/markers.list"
         maps: "assets/maps.list"
         tiles_seeds: "assets/tiles_seeds.txt"
         amjad_map_dir: "assets/map/"
@@ -92,6 +93,8 @@ module.exports = (grunt) ->
     #load all tiles
     all_tiles = do getAllTiles = () ->
         generating_seed = default_seed = 0xABCDEF
+        if not fs.existsSync(config.tiles)
+            return []
         out = fs.readFileSync(config.tiles)
         out = JSON.parse(out)
         for key, tile of out
@@ -111,6 +114,10 @@ module.exports = (grunt) ->
         if is_win
             out = out.map (x) -> return x.replace(/\\/g,"\/")
         return out
+
+    all_markers = do getAllMarkers = () ->
+        out = fs.readFileSync(config.markers)
+        return JSON.parse(out)
 
     #load the latest seed
     generating_seed = do loadSeed = () ->
@@ -143,19 +150,33 @@ module.exports = (grunt) ->
         
         socket.on "LOAD_MAPEDITOR_ASSETS", () ->
             socket.emit("LOAD_TILES", all_tiles)
+            socket.emit("LOAD_MARKERS", all_markers)
 
-        socket.on "TILE_SAVED", (tile) ->
+        socket.on "TILE_SAVED", (tile, updateId = true) ->
             tile = JSON.parse(tile)
             console.log "New tile #{tile.name}".yellow
             list = JSON.parse(fs.readFileSync(config.tiles))
-            id = Math.floor(tiles_randomizator() * predict_tiles)
-            tile["id"] = id
+            if updateId
+                id = Math.floor(tiles_randomizator() * predict_tiles)
+                tile["id"] = id
             list[tile.name] = tile
             try
                 fs.writeFileSync(config.tiles, JSON.stringify(list))
             catch err
                 console.log err.red
             socket.emit "TILE_ADDED", tile
+
+        socket.on "MARKER_SAVED", (marker) ->
+            list = JSON.parse(fs.readFileSync(config.markers))
+            if list.indexOf(marker) is -1
+                list.push marker
+                try
+                    fs.writeFileSync(config.markers, JSON.stringify(list))
+                catch err
+                    console.log err.red
+                socket.emit "MARKER_ADDED", marker
+            else
+                console.log "Marker #{marker} exists!"
 
         ### @todo ###
         socket.on "TILE_REMOVED", (tile) ->
