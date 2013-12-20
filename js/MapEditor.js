@@ -30,10 +30,13 @@
     });
     socket = io.connect('http://localhost:8080');
     socket.emit("LOAD_MAPEDITOR_ASSETS");
+<<<<<<< HEAD
     socket.on("MARKER_ADDED", function(marker) {
       addNewMarker(marker);
       return Hal.trigger("TILE_MNGR_NEW_MARKER", marker);
     });
+=======
+>>>>>>> 76755d0220628a714cc687838ff47226da3c06d7
     socket.on("TILE_ADDED", function(tile) {
       return Hal.trigger("TILE_MNGR_NEW_TILE", tile);
     });

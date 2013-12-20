@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "halal-mapeditor",
   "version": "0.0.1",
@@ -25,3 +26,32 @@
     "url": "http://iccthedral.github.com/halal-mapeditor"
   }
 }
+=======
+{
+  "name": "halal-mapeditor",
+  "version": "0.0.1",
+  "description": "Halal - Map editor",
+  "dependencies": {},
+  "license": "BSD",
+  "devDependencies": {
+    "bower": "~1.2.8",
+    "coffee-script": "~1.6.3",
+    "grunt-cli": "~0.1.11",
+    "colors": "~0.6.2",
+    "watchr": "~2.4.6",
+    "wrench": "~1.5.4",
+    "socket.io": "~0.9.16",
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-coffee": "~0.7.0"
+  },
+  "author": {
+    "name": "Aleksandar Milic",
+    "email": "javolimperl@gmail.com",
+    "url": "http://iccthedral.github.com/halal-mapeditor"
+  }
+}
+>>>>>>> 76755d0220628a714cc687838ff47226da3c06d7

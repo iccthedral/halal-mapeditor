@@ -217,4 +217,3 @@ module.exports = (grunt) ->
 
         proc.on "close", (retcode) ->
             console.log retcode
-            console.log "Done compiling".green
