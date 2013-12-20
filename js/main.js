@@ -16,11 +16,7 @@
     }
   });
 
-<<<<<<< HEAD
   require(["halal", "../../../js/IsometricMap", "../../../js/MetaConfig"], function(Hal, IsometricMap, MetaConfig) {
-=======
-  require(["halal", "../../../js/IsometricMap"], function(Hal, IsometricMap) {
->>>>>>> 76755d0220628a714cc687838ff47226da3c06d7
     llog.setLevel("DEBUG");
     llogi("Halal loaded");
     Hal.asm.loadViaSocketIO();
@@ -39,11 +35,7 @@
           draw_quadspace: false,
           draw_stat: true,
           mask: Hal.asm.getSprite("editor/tilemask_128x64"),
-<<<<<<< HEAD
           max_layers: MetaConfig.MAX_LAYERS
-=======
-          max_layers: 6
->>>>>>> 76755d0220628a714cc687838ff47226da3c06d7
         });
         isomap.pause();
         Hal.addScene(isomap);

@@ -126,10 +126,16 @@
         }
       });
       return this.on("OVER_NEW_TILE", function(newtile) {
+        var ind;
         if (this.tile_under_mouse != null) {
           this.tile_under_mouse.attr("stroke_color", "white");
           this.tile_under_mouse.attr("stroke_width", 0.5);
+          ind = this.visible_ents.indexOf(this.tile_under_mouse);
+          if (ind !== -1) {
+            this.visible_ents.splice(ind, 1);
+          }
         }
+        this.visible_ents.push(newtile);
         newtile.attr("stroke_color", "red");
         newtile.attr("stroke_width", 2);
         if (!newtile.tweener.isAnimating()) {

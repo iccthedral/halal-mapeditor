@@ -16,8 +16,18 @@
     });
     Hal.on("MAP_ADDED", function(isomap) {
       MAP = isomap;
-      return MAP.on("TILE_MANAGER_LOADED", function() {
+      MAP.on("TM_TILES_LOADED", function() {
         return showLayers(0);
+      });
+      return MAP.on("TM_MARKERS_LOADED", function() {
+        var marker, _i, _len, _ref, _results;
+        _ref = isomap.tm.markers;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          marker = _ref[_i];
+          _results.push(addNewMarker(marker));
+        }
+        return _results;
       });
     });
     Hal.on("MAP_SAVED", function(saved_map, start) {
@@ -30,13 +40,10 @@
     });
     socket = io.connect('http://localhost:8080');
     socket.emit("LOAD_MAPEDITOR_ASSETS");
-<<<<<<< HEAD
     socket.on("MARKER_ADDED", function(marker) {
       addNewMarker(marker);
       return Hal.trigger("TILE_MNGR_NEW_MARKER", marker);
     });
-=======
->>>>>>> 76755d0220628a714cc687838ff47226da3c06d7
     socket.on("TILE_ADDED", function(tile) {
       return Hal.trigger("TILE_MNGR_NEW_TILE", tile);
     });

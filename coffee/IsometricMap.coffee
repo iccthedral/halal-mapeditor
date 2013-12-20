@@ -18,7 +18,8 @@ define ["halal"], (Hal) ->
                 
         @supported_modes["mode-erase"] = () =>
             @processLeftClick()
-            return if not @clicked_layer? #or @clicked_layer.tweener.isAnimating() 
+            return if not @clicked_layer? 
+            #or @clicked_layer.tweener.isAnimating() 
             # @clicked_layer.tween(
             #     attr: "h"
             #     from: 0
@@ -126,6 +127,11 @@ define ["halal"], (Hal) ->
             if @tile_under_mouse?
                 @tile_under_mouse.attr("stroke_color", "white")
                 @tile_under_mouse.attr("stroke_width", 0.5)
+                ind = @visible_ents.indexOf(@tile_under_mouse)
+                if ind isnt -1
+                    @visible_ents.splice(ind, 1)
+                    
+            @visible_ents.push(newtile)
             newtile.attr("stroke_color", "red")
             newtile.attr("stroke_width", 2)
             if not newtile.tweener.isAnimating()
