@@ -37,7 +37,11 @@
 
     SectionManager.prototype.fillAsFromCenterSection = function(center_section) {};
 
-    SectionManager.prototype.needsLoading = function(world_center) {};
+    SectionManager.prototype.needsLoading = function(world_center) {
+      if (this._update_transform) {
+        return;
+      }
+    };
 
     return SectionManager;
 

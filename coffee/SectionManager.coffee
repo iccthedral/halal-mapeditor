@@ -30,6 +30,6 @@ define [], () ->
 
         needsLoading: (world_center) ->
             if @_update_transform
-                
+                return
             return
 
