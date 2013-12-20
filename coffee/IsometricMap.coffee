@@ -152,12 +152,14 @@ define ["halal"], (Hal) ->
         )
 
         Hal.on "KEY_DOWN", (ev) =>
-            if ev.keyCode is Hal.Keys.SHIFT
-                @persist_tile_placement = not @persist_tile_placement
-                if @persist_tile_placement
-                    @disablePanning()
-                else
-                    @enablePanning()
+            if ev.keyCode is Hal.Keys.SHIFT and not @persist_tile_placement
+                @persist_tile_placement = true
+                @disablePanning()
+
+        Hal.on "KEY_UP", (ev) =>
+            if ev.keyCode is Hal.Keys.SHIFT and @persist_tile_placement
+                @persist_tile_placement = false
+                @enablePanning()
 
     IsometricMap::placeTileLayerUnderMouse = () ->
         return if not @tile_under_mouse? or not @selected_tile?

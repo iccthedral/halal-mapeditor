@@ -155,14 +155,16 @@
           return this.placeTileLayerUnderMouse();
         }
       });
-      return Hal.on("KEY_DOWN", function(ev) {
-        if (ev.keyCode === Hal.Keys.SHIFT) {
-          _this.persist_tile_placement = !_this.persist_tile_placement;
-          if (_this.persist_tile_placement) {
-            return _this.disablePanning();
-          } else {
-            return _this.enablePanning();
-          }
+      Hal.on("KEY_DOWN", function(ev) {
+        if (ev.keyCode === Hal.Keys.SHIFT && !_this.persist_tile_placement) {
+          _this.persist_tile_placement = true;
+          return _this.disablePanning();
+        }
+      });
+      return Hal.on("KEY_UP", function(ev) {
+        if (ev.keyCode === Hal.Keys.SHIFT && _this.persist_tile_placement) {
+          _this.persist_tile_placement = false;
+          return _this.enablePanning();
         }
       });
     };
